@@ -7,17 +7,28 @@
 
 # ----------------------------------------------------------------
 printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
-echo "Listing NVM"
-nvm list
+echo "NVM"
+if command_exists nvm ; then
+    echo "Listing local"
+    nvm list
+else
+    echo "NOT FOUND"
+fi
 
 # ----------------------------------------------------------------
 printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
-echo "Listing Docker containers"
-docker container ls
+echo "Docker"
+if command_exists docker ; then
+    echo "Listing containers"
+    docker container ls
+else
+    echo "NOT FOUND"
+fi
 
 # ----------------------------------------------------------------
 printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
-echo "Listing pyenv versions"
+echo "pyenv"
+echo "Listing versions"
 eval "$(pyenv init -)"
 pyenv versions
 
@@ -34,9 +45,14 @@ pyenv versions
 
 # ----------------------------------------------------------------
 printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
-echo "Listing rust"
-rustup show
-cargo --version
+echo "Rust"
+if command_exists rustup ; then
+    echo "Listing:"
+    rustup show 2>/dev/null
+    cargo --version 2>/dev/null
+else
+    echo "NOT FOUND"
+fi
 
 # # ----------------------------------------------------------------
 # printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
@@ -49,9 +65,15 @@ cargo --version
 
 # ----------------------------------------------------------------
 printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
-echo "Launching GPG"
+echo "GPG"
 # in zprofile export GPG_TTY=`tty`
-gpgconf --launch gpg-agent
+if command_exists gpgconf ; then
+    gpgconf --launch gpg-agent
+    echo "Launching"
+else
+    echo "NOT FOUND"
+fi
+
 
 # ----------------------------------------------------------------
 printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
