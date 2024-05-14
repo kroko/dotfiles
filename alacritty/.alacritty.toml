@@ -1,0 +1,25 @@
+# https://toml.io/en/v1.0.0
+
+# https://alacritty.org/config-alacritty.html
+
+live_config_reload = true
+
+[window]
+padding = { x = 10, y = 10}
+option_as_alt = "Both" # Default: "None"
+
+[keyboard]
+# https://github.com/alacritty/alacritty/issues/93
+bindings = [
+  # move between words using alt-arrows same as alt-b/f .
+  { key = "Left",  mods = "Alt", chars = "\u001BB" },
+  { key = "Right", mods = "Alt", chars = "\u001BF" },
+  # https://stackoverflow.com/a/42461580/1979530
+  # { key = "Return", mods = "Shift", chars = "\u001B[13;2u" }
+]
+
+[colors]
+
+[colors.primary]
+  foreground = "#d8d8d8"
+  background = "#181818"

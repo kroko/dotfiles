@@ -1,0 +1,14 @@
+[pull]
+	rebase = false
+[user]
+	name = kroko
+	email = 720976+kroko@users.noreply.github.com
+	signingkey = 9ED9A2CB9EDFF484
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+[commit]
+	gpgsign = true
+[gpg]
+	program = /usr/bin/gpg

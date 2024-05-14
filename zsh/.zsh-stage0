@@ -1,0 +1,116 @@
+# → .zshenv, always
+# → .zprofile, if login shell
+# → .zshrc, if interactive shell
+# → .zlogin, if login shell
+# → .zlogout, if login shell
+
+# macOS
+# this WILL be sourced
+
+# Ubuntu
+# this will NOT be sourced, use .zshenv
+
+# ----------------------------------------------------------------
+# ----------------------------------------------------------------
+# ----------------------------------------------------------------
+
+# echo ".zsh-stage0 -- in"
+
+# ----------------------------------------------------------------
+# COMMON
+# ----------------------------------------------------------------
+
+# ----------------------------------------------------------------
+# Editor
+# export EDITOR=vim
+
+# ----------------------------------------------------------------
+# Node Version Manager
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# ----------------------------------------------------------------
+# gpg
+export GPG_TTY=`tty`
+
+# ----------------------------------------------------------------
+# Composer
+export PATH="$HOME/.composer/vendor/bin:$PATH"
+
+# ----------------------------------------------------------------
+# Python pyenv
+# v1
+# export PYENV_ROOT="$HOME/.pyenv"
+# command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+# v2
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+# eval "$(pyenv init -)" # run init in later stage
+
+# ----------------------------------------------------------------
+# Python virtualenv and virtualenvwrapper
+# export WORKON_HOME=$HOME/.virtualenvs
+# export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
+# source /usr/local/bin/virtualenvwrapper.sh
+
+# # ----------------------------------------------------------------
+# # g for Golang
+# export GOPATH="$HOME/.go/go"; export GOROOT="$HOME/.go/root"; export PATH="$GOPATH/bin:$PATH"; # g-install: do NOT edit, see https://github.com/stefanmaric/g
+# alias govm="$GOPATH/bin/g"; # g-install: do NOT edit, see https://github.com/stefanmaric/g
+
+# ----------------------------------------------------------------
+# rustup
+. "$HOME/.cargo/env"
+
+# # ----------------------------------------------------------------
+# # Ruby
+# export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
+# export PATH="$HOME/.rbenv/bin:$PATH"
+# eval "$(rbenv init -)"
+
+# ----------------------------------------------------------------
+# macOS
+# ----------------------------------------------------------------
+if [[ $(uname) == "Darwin" ]]; then
+  # ----------------------------------------------------------------
+  # Homebrew arm64
+  export PATH="/opt/homebrew/bin:$PATH"
+
+  # ----------------------------------------------------------------
+  # VS Code
+  export PATH="/Applications/Visual Studio Code.app/Contents/Resources/app/bin:$PATH"
+
+  # # ----------------------------------------------------------------
+  # # Qt
+  # export PATH="/usr/local/sbin:$PATH"
+  # export PATH="/usr/local/opt/qt/bin:$PATH"
+
+  # # ----------------------------------------------------------------
+  # Setting PATH for Python 2.7
+  # The original version is saved in .zprofile.pysave
+  export PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:${PATH}"
+
+  # ----------------------------------------------------------------
+  # STM32
+  export STM32CubeMX_PATH=/Applications/STMicroelectronics/STM32CubeMX.app/Contents/Resources
+
+# ----------------------------------------------------------------
+# Debian Ubuntu
+# ----------------------------------------------------------------
+elif command -v apt > /dev/null; then
+
+  # ----------------------------------------------------------------
+
+# ----------------------------------------------------------------
+# Unknown
+# ----------------------------------------------------------------
+else
+    echo 'Unknown OS!'
+fi
+
+
+
+# # ----------------------------------------------------------------
+
+# echo ".zsh-stage0 -- out"

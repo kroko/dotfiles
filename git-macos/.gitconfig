@@ -1,0 +1,18 @@
+[pull]
+	rebase = false
+[user]
+	name = kroko
+	email = 720976+kroko@users.noreply.github.com
+	signingkey = CDA129CF37CFCFF4
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+[gpg]
+	program = /opt/homebrew/bin/gpg
+[commit]
+	gpgSign = true
+[tag]
+	gpgSign = true
+[credential]
+	helper = store

@@ -1,0 +1,78 @@
+
+# echo ".zsh-stage3 -- in"
+
+# ----------------------------------------------------------------
+# COMMON
+# ----------------------------------------------------------------
+
+# ----------------------------------------------------------------
+printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
+echo "Listing NVM"
+nvm list
+
+# ----------------------------------------------------------------
+printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
+echo "Listing Docker containers"
+docker container ls
+
+# ----------------------------------------------------------------
+printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
+echo "Listing pyenv versions"
+eval "$(pyenv init -)"
+pyenv versions
+
+# ----------------------------------------------------------------
+# printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
+# echo "Listing pyenv virtualenvs"
+# pyenv virtualenvs
+# echo "Use 'pyenv activate <envname>' to activate"
+
+# # ----------------------------------------------------------------
+# printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
+# echo "Listing go"
+# govm list
+
+# ----------------------------------------------------------------
+printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
+echo "Listing rust"
+rustup show
+cargo --version
+
+# # ----------------------------------------------------------------
+# printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
+# echo "Listing ruby versions"
+# rbenv versions
+# echo "Listing ruby version set"
+# rbenv version
+# echo "Listing current ruby global"
+# rbenv global
+
+# ----------------------------------------------------------------
+printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
+echo "Launching GPG"
+# in zprofile export GPG_TTY=`tty`
+gpgconf --launch gpg-agent
+
+# ----------------------------------------------------------------
+printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
+
+# ----------------------------------------------------------------
+# macOS
+# ----------------------------------------------------------------
+if [[ $(uname) == "Darwin" ]]; then
+  figlet kroko @ macos 2>/dev/null
+
+# ----------------------------------------------------------------
+# Debian Ubuntu
+# ----------------------------------------------------------------
+elif command -v apt > /dev/null; then
+  figlet kroko @ debian 2>/dev/null
+
+# ----------------------------------------------------------------
+# Unknown
+# ----------------------------------------------------------------
+else
+    figlet kroko @ unknown 2>/dev/null
+fi
+
+# echo ".zsh-stage3 -- out"
