@@ -13,5 +13,9 @@ other options
 ...haah.
 
 ```sh
+stow stow # for .stow-global-ignore
 stow zsh
+stow tmux
+stow vim
+stow alacritty
 ```
