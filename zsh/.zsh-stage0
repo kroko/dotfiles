@@ -74,6 +74,14 @@ export PYENV_ROOT="$HOME/.pyenv"
 # ----------------------------------------------------------------
 if [[ $(uname) == "Darwin" ]]; then
   # ----------------------------------------------------------------
+  # Some Homebrew stuff
+  export PATH="/usr/local/sbin::$PATH"
+
+  # ----------------------------------------------------------------
+  # Homebrew x64
+  # all under /usr/local
+
+  # ----------------------------------------------------------------
   # Homebrew arm64
   export PATH="/opt/homebrew/bin:$PATH"
 
