@@ -54,8 +54,8 @@ export PYENV_ROOT="$HOME/.pyenv"
 # export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
 # source /usr/local/bin/virtualenvwrapper.sh
 
-# # ----------------------------------------------------------------
-# # g for Golang
+# ----------------------------------------------------------------
+# g for Golang
 export GOPATH="$HOME/.go/go"; export GOROOT="$HOME/.go/root"; export PATH="$GOPATH/bin:$PATH"; # g-install: do NOT edit, see https://github.com/stefanmaric/g
 alias govm="$GOPATH/bin/g"; # g-install: do NOT edit, see https://github.com/stefanmaric/g
 
