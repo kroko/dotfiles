@@ -189,12 +189,14 @@ function r() {
 
 # when running tmux w/o args
 # create new default session or attoach to it if exists
+# else passthrough
 tmux () {
   if [ "$#" -eq 0 ]
     then command tmux new -A -s 'def'
     else command tmux "$@"
   fi
   }
+# todo, craft tmux attach -t n selector
 
 print255 () {
   for i in {0..255}; do
