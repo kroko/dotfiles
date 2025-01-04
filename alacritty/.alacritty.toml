@@ -10,6 +10,12 @@ live_config_reload = true
 padding = { x = 10, y = 10}
 option_as_alt = "Both" # Default: "None"
 
+[colors]
+
+[colors.primary]
+  foreground = "#d8d8d8"
+  background = "#181818"
+
 [keyboard]
 # https://github.com/alacritty/alacritty/issues/93
 bindings = [
@@ -19,9 +25,3 @@ bindings = [
   # https://stackoverflow.com/a/42461580/1979530
   # { key = "Return", mods = "Shift", chars = "\u001B[13;2u" }
 ]
-
-[colors]
-
-[colors.primary]
-  foreground = "#d8d8d8"
-  background = "#181818"
