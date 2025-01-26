@@ -38,8 +38,8 @@ pyenv versions
 # pyenv virtualenvs
 # echo "Use 'pyenv activate <envname>' to activate"
 
-# # ----------------------------------------------------------------
-# printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
+# ----------------------------------------------------------------
+printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
 echo "go"
 if command_exists docker ; then
     echo "Listing versions"
