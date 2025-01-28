@@ -31,7 +31,7 @@ pyenv versions
 # ----------------------------------------------------------------
 printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
 echo "go"
-if command_exists docker ; then
+if command_exists govm ; then
     echo "Listing versions"
     govm list
 else
