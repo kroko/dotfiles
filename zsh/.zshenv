@@ -1,21 +1,7 @@
-# → .zshenv, always
-# → .zprofile, if login shell
-# → .zshrc, if interactive shell
-# → .zlogin, if login shell
+# → .zshenv, always                 macos YES, Ubuntu YES
+# → .zprofile, if login shell       macos YES, Ubuntu NOT
+# → .zshrc, if interactive shell    macos YES, Ubuntu YES
+# → .zlogin, if login shell         macos YES, Ubuntu NOT
 # → .zlogout, if login shell
 
-# macOS
-# this WILL be sourced
-
-# Ubuntu
-# this WILL be sourced
-
-# ----------------------------------------------------------------
-# ----------------------------------------------------------------
-# ----------------------------------------------------------------
-
-# source $(dirname $0)/.zsh-stage0
-
-# echo ".zshenv -- in"
 source $HOME/.zsh-stage0
-# echo ".zshenv -- out"
