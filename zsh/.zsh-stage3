@@ -17,16 +17,6 @@ fi
 
 # ----------------------------------------------------------------
 printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
-echo "Docker"
-if command_exists docker ; then
-    echo "Listing containers"
-    docker container ls
-else
-    echo "NOT FOUND"
-fi
-
-# ----------------------------------------------------------------
-printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
 echo "pyenv"
 echo "Listing versions"
 eval "$(pyenv init -)"
@@ -79,27 +69,55 @@ else
     echo "NOT FOUND"
 fi
 
-
-# ----------------------------------------------------------------
-printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
-
 # ----------------------------------------------------------------
 # macOS
 # ----------------------------------------------------------------
 if [[ $(uname) == "Darwin" ]]; then
+
+  # ----------------------------------------------------------------
+  printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
+  echo "Docker"
+  if command_exists docker ; then
+      echo "Listing containers"
+      docker container ls
+  else
+      echo "NOT FOUND"
+  fi
+
+  # ----------------------------------------------------------------
+  printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
   figlet kroko @ macos 2>/dev/null
 
 # ----------------------------------------------------------------
 # Debian Ubuntu
 # ----------------------------------------------------------------
 elif command -v apt > /dev/null; then
+
+  # ----------------------------------------------------------------
+  printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
+  echo "Docker"
+  if command_exists docker ; then
+    if [ $EUID -eq 0 ] || (groups | grep docker); then
+      echo "Listing containers"
+      docker container ls
+    else
+      echo "No permissions for Docker"
+    fi
+  else
+      echo "NOT FOUND"
+  fi
+
+  # ----------------------------------------------------------------
+  printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
   figlet kroko @ debian 2>/dev/null
 
 # ----------------------------------------------------------------
 # Unknown
 # ----------------------------------------------------------------
 else
-    figlet kroko @ unknown 2>/dev/null
+  # ----------------------------------------------------------------
+  printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
+  figlet kroko @ unknown 2>/dev/null
 fi
 
 # echo ".zsh-stage3 -- out"
