@@ -169,43 +169,172 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-mdc() {
-    mkdir -p "$@" && cd "$_";
-    # if [ "$1" != "" ] # or better, if [ -n "$1" ]
-    # then
-    #     mkdir $1 && cd $1
-    # else
-    #     echo "argument needed"
-    # fi
+# ----------------------------------------------------------------
+
+command_exists () {
+    type "$1" &> /dev/null ;
 }
 
-function f() {
+# ----------------------------------------------------------------
+# adopted, added arrow navigation n stuff
+# https://unix.stackexchange.com/a/771364/221829
+
+function choose_from_menu_zsh() {
+    local prompt="$1" outidx="$2" outval="$3"
+    shift
+    shift
+    shift
+    # count had to be assigned the pure number of arguments
+    local options=("$@") cur=1 count=$# index=0
+    local esc=$(echo -en "\033") # cache ESC as test doesn't allow esc codes
+    echo -n "$prompt"
+
+    function __clamp()
+    {
+      [ "$cur" -lt 1 ] && cur=1
+      [ "$cur" -gt $count ] && cur=$count
+    }
+    function __move_up()
+    {
+      cur=$(( $cur - 1 ))
+      __clamp
+    }
+    function __move_down()
+    {
+      cur=$(( $cur + 1 ))
+      __clamp
+    }
+
+    # measure the rows of the menu, needed for erasing those rows when moving
+    # the selection
+    menu_rows=$#
+    total_rows=$(($menu_rows + 1))
+    while true; do
+      index=1
+      for o in "${options[@]}"
+      do
+          if [[ "$index" == "$cur" ]]
+          then echo -e " \033[38;5;41m> \033[0m\033[38;5;35m$o\033[0m" # mark & highlight the current option
+          else echo "   $o"
+          fi
+          index=$(( $index + 1 ))
+      done
+      printf "\n"
+
+      # set mark for cursor
+      printf "\033[s"
+
+      read -rsnk key # -rsk
+      if [[ "${key}" == $'\n' || $key == '' ]]; then
+        break
+      elif [[ $key == k ]]; then # || $key == l
+        __move_up
+      elif [[ $key == j ]]; then # || $key == h
+        __move_down
+      elif [[ "${key}" == $'\x1B' ]]; then
+        read -rsnk -t 0.1 input
+        if [[ "$input" = "[" || "$input" = "O" ]]; then
+          read -rsnk input # -t 0.1
+          case "$input"
+          in
+            A) __move_up   ;;
+            B) __move_down ;;
+            # C) __move_down ;;
+            # D) __move_up ;;
+          esac
+        # elif [ "$input" = "" ]; then
+        else
+          echo -n "Abort\n\n"
+          cur=0
+          break
+        fi
+        # flushing stdin
+        # read -rsnk # -t 0.1
+      fi
+      # move back to saved cursor position
+      printf "\033[u"
+      # erase all lines of selections to build them again with new positioning
+      for ((i = 0; i < $total_rows; i++)); do
+          printf "\033[2k\r"
+          printf "\033[F"
+      done
+    done
+    # pass choosen selection to main body of script
+    eval $outidx=$cur
+    if [ $cur -ne 0 ]; then
+      eval $outval="'${options[$cur]}'"
+    fi
+}
+
+# ----------------------------------------------------------------
+mdc() {
+    mkdir -p "$@" && cd "$_";
+}
+
+# ----------------------------------------------------------------
+function fnd() {
   find . -iname "*$1*" ${@:2}
 }
 
+# ----------------------------------------------------------------
 function r() {
   grep "$1" ${@:2} -R .
 }
 
-# when running tmux w/o args
-# create new default session or attoach to it if exists
-# else passthrough
-tmux () {
-  if [ "$#" -eq 0 ]
-    then command tmux new -A -s 'def'
-    else command tmux "$@"
-  fi
-  }
-# todo, craft tmux attach -t n selector
-
+# ----------------------------------------------------------------
 print255 () {
   for i in {0..255}; do
       printf "\x1b[38;5;${i}mcolour${i}\x1b[0m\n"
   done
 }
 
-command_exists () {
-    type "$1" &> /dev/null ;
-}
+# ----------------------------------------------------------------
+# if any arguments are passed to tmux, behave (passthrough)
+# however, if no arguments are passed
+# if no session present - create our default session and attach
+# if only one session and it is default - attach to it
+# if more than one session - visual selector to which to attach
+tmux () {
+  if ! [ "$#" -eq 0 ]; then
+    # echo "passthrough"
+    command tmux "$@"
+    return 0
+  fi
 
-# echo ".zsh-stage2 -- out"
+  local dsn="def"
+
+  local tmux_sessions=(${(f)"$(command tmux ls)"})
+  local tmux_sessions_count=${#tmux_sessions[*]}
+
+  if [ "$#" -eq 0 ]; then
+    # echo "no args"
+    if [ "$tmux_sessions_count" -eq 0 ]; then
+      # echo "no session, create default: $dsn"
+      command tmux new -A -s $dsn
+      return 0
+    elif [ "$tmux_sessions_count" -eq 1 ]; then
+      # echo "one session, attaching to it"
+      # [ ${tmux_sessions[1]%%:*} = $dsn ]
+      command tmux attach
+      return 0
+    fi
+  fi
+
+  local -a options
+  options+=("New session")
+  options+=(${tmux_sessions[@]})
+
+  local choice_idx
+  local choice_val
+  choose_from_menu_zsh "\nSelect tmux session to attach to:\n\n" choice_idx choice_val "${options[@]}"
+  if [ $choice_idx -ne 0 ]; then
+    if [ $choice_idx -eq 1 ]; then
+      # echo "creating new tmux session"
+      command tmux new-session
+    else
+      local session_name=${choice_val%%:*}
+      # echo "attaching to $session_name"
+      command tmux new -A -s $session_name
+    fi
+  fi
+}
