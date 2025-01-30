@@ -301,7 +301,8 @@ tmux () {
     return 0
   fi
 
-  local dsn="def"
+  # default session name
+  local dsn="kroko"
 
   local tmux_sessions=(${(f)"$(command tmux ls)"})
   local tmux_sessions_count=${#tmux_sessions[*]}
