@@ -170,7 +170,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # ----------------------------------------------------------------
-alias l='ls -lah -D "%Y-%d-%m %H:%M:%S"'
+alias l='ls -lahp -D "%Y-%d-%m %H:%M:%S" --color=auto'
 
 # ----------------------------------------------------------------
 alias calc='bc -l'
