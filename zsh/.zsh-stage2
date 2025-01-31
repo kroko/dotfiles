@@ -170,13 +170,14 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # ----------------------------------------------------------------
-alias l='ls -lahp -D "%Y-%d-%m %H:%M:%S" --color=auto'
+if [[ $(uname) == "Darwin" ]]; then
+  alias l='ls -lahp -D "%Y-%d-%m %H:%M:%S" --color=auto'
+else
+  alias l='ls -lahp --time-style="+%Y-%d-%m %H:%M:%S"  --color=auto'
+fi
 
 # ----------------------------------------------------------------
 alias calc='bc -l'
-
-# ----------------------------------------------------------------
-alias nocomment='grep -Ev '''^(#|$)''''
 
 # ----------------------------------------------------------------
 cdl() {
