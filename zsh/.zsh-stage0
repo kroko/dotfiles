@@ -110,7 +110,7 @@ elif command -v apt > /dev/null; then
 
   # ----------------------------------------------------------------
 
-  LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
+  export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
 
 # ----------------------------------------------------------------
 # Unknown
