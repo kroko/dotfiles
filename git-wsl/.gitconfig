@@ -15,4 +15,5 @@
 [tag]
 	gpgSign = true
 [core]
-	sshcommand = ssh.exe
+	sshCommand = 'ssh.exe'
+
