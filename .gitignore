@@ -1,3 +1,5 @@
+gpg-linux/.gnupg/
+!gpg-linux/.gnupg/gpg*
 tinker/
 
 # Created by https://www.toptal.com/developers/gitignore/api/osx,less,node,sass,bower,grunt,linux,pydev,xcode,android,angular,eclipse,laravel,pycharm,vagrant,windows,composer,intellij,netbeans,phpstorm,textmate,webstorm,qtcreator,sublimetext,intellij+iml,visualstudio,androidstudio,git
