@@ -116,6 +116,7 @@ if [[ $(uname) == "Darwin" ]]; then
 elif command -v apt > /dev/null; then
   plugins=(
     git
+    docker
     colored-man-pages
     colorize
     zsh-better-npm-completion
@@ -138,6 +139,12 @@ fi
 # ----------------------------------------------------------------
 
 export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$HOST
+
+# ----------------------------------------------------------------
+# enable option-stacking for docker
+
+zstyle ':completion:*:*:docker:*' option-stacking yes
+zstyle ':completion:*:*:docker-*:*' option-stacking yes
 
 # ----------------------------------------------------------------
 
