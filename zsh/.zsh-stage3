@@ -18,9 +18,13 @@ fi
 # ----------------------------------------------------------------
 printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
 echo "pyenv"
-echo "Listing versions"
-eval "$(pyenv init -)"
-pyenv versions
+if command_exists pyenv; then
+    echo "Listing versions"
+    eval "$(pyenv init -)"
+    pyenv versions
+else
+    echo "NOT FOUND"
+fi
 
 # ----------------------------------------------------------------
 # printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''

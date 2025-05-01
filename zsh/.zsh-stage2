@@ -116,6 +116,7 @@ if [[ $(uname) == "Darwin" ]]; then
 elif command -v apt > /dev/null; then
   plugins=(
     git
+    docker
     colored-man-pages
     colorize
     zsh-better-npm-completion
@@ -138,6 +139,12 @@ fi
 # ----------------------------------------------------------------
 
 export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$HOST
+
+# ----------------------------------------------------------------
+# enable option-stacking for docker
+
+zstyle ':completion:*:*:docker:*' option-stacking yes
+zstyle ':completion:*:*:docker-*:*' option-stacking yes
 
 # ----------------------------------------------------------------
 
@@ -173,7 +180,13 @@ source $ZSH/oh-my-zsh.sh
 if [[ $(uname) == "Darwin" ]]; then
   alias l='ls -lahp -D "%Y-%d-%m %H:%M:%S" --color=auto'
 else
-  alias l='ls -lahp --time-style="+%Y-%d-%m %H:%M:%S"  --color=auto'
+  alias l='ls -lahpgo --time-style="+" --color=auto'
+  alias ll='ls -lahp --time-style="+%Y-%d-%m %H:%M:%S" --color=auto'
+fi
+
+if [[ $(grep -i Microsoft /proc/version) ]]; then
+  alias ssh-add='ssh-add.exe'
+  alias ssh='ssh-add.exe -l > /dev/null || ssh-add.exe && echo -e "\e[92mssh-key(s) are now available in your ssh-agent until you lock your windows machine! \n \e[0m" && ssh.exe'
 fi
 
 # ----------------------------------------------------------------

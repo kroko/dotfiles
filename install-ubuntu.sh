@@ -4,9 +4,10 @@
 
 # install oh my zsh, if not
 if [ -d ~/.oh-my-zsh ]; then
-	echo "oh-my-zsh is installed"
- else
- 	echo "oh-my-zsh is not installed, installing"
+  echo "oh-my-zsh is installed"
+  else
+  echo "oh-my-zsh is not installed, installing"
+  sudo apt install -y zsh
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
 
