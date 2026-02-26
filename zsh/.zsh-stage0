@@ -22,7 +22,11 @@
 
 # ----------------------------------------------------------------
 # Editor
-# export EDITOR=vim
+# export EDITOR=vi
+
+# ----------------------------------------------------------------
+# local bins
+export PATH="$HOME/.local/bin:$PATH"
 
 # ----------------------------------------------------------------
 # Node Version Manager
@@ -39,20 +43,9 @@ export GPG_TTY=`tty`
 export PATH="$HOME/.composer/vendor/bin:$PATH"
 
 # ----------------------------------------------------------------
-# Python pyenv
-# v1
-# export PYENV_ROOT="$HOME/.pyenv"
-# command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-# v2
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-# eval "$(pyenv init -)" # run init in later stage
-
-# ----------------------------------------------------------------
-# Python virtualenv and virtualenvwrapper
-# export WORKON_HOME=$HOME/.virtualenvs
-# export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
-# source /usr/local/bin/virtualenvwrapper.sh
+# uv python
+# https://docs.astral.sh/uv/getting-started/installation/
+eval "$(uv generate-shell-completion zsh)"
 
 # ----------------------------------------------------------------
 # g for Golang

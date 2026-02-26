@@ -17,20 +17,8 @@ fi
 
 # ----------------------------------------------------------------
 printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
-echo "pyenv"
-if command_exists pyenv; then
-    echo "Listing versions"
-    eval "$(pyenv init -)"
-    pyenv versions
-else
-    echo "NOT FOUND"
-fi
-
-# ----------------------------------------------------------------
-# printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
-# echo "Listing pyenv virtualenvs"
-# pyenv virtualenvs
-# echo "Use 'pyenv activate <envname>' to activate"
+uv --version
+uv python list
 
 # ----------------------------------------------------------------
 printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
