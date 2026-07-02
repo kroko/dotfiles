@@ -7,7 +7,7 @@
 
 # ----------------------------------------------------------------
 printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
-echo "NVM"
+echo "node.js (via nvm)"
 if command_exists nvm ; then
     echo "Listing local"
     nvm list
@@ -17,7 +17,7 @@ fi
 
 # ----------------------------------------------------------------
 printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
-echo "uv for python"
+echo "python (via uv)"
 if command_exists uv; then
     # https://docs.astral.sh/uv/getting-started/installation/
     eval "$(uv generate-shell-completion zsh)"
@@ -30,17 +30,19 @@ fi
 
 # ----------------------------------------------------------------
 printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
-echo "go"
-if command_exists govm && [ -d "$GOPATH" ]; then
-    echo "Listing versions"
-    govm list
+echo "go (via govm)"
+if command_exists govm && command_exists go; then
+    echo "Listing instaled versions"
+    govm list | grep -oE '\*[[:space:]]*go[^[:space:]]+' | sed 's/.*go/go/'
+    echo "Current in env"
+    go version
 else
     echo "NOT FOUND"
 fi
 
 # ----------------------------------------------------------------
 printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
-echo "Rust"
+echo "rust (via rustup)"
 if command_exists rustup ; then
     echo "Listing:"
     rustup show 2>/dev/null
