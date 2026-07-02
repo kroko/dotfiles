@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # install xcode developer tools, let us keep things clangy
 xcode-select --install
@@ -8,7 +8,7 @@ xcode-select --install
 # install oh my zsh, if not
 if [ -d ~/.oh-my-zsh ]; then
   echo "oh-my-zsh is installed"
-  else
+else
   echo "oh-my-zsh is not installed, installing"
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
