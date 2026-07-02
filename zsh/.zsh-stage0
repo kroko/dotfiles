@@ -24,8 +24,26 @@
 # Editor
 # export EDITOR=vi
 
+
+# ----------------------------------------------------------------
+# homebrew bins
+# ----------------------------------------------------------------
+
+if [[ $(uname) == "Darwin" ]]; then
+  # ----------------
+  # Some Homebrew stuff
+  export PATH="/usr/local/sbin:$PATH"
+  # ----------------
+  # Homebrew x64
+  # all under /usr/local
+  # ----------------
+  # Homebrew arm64
+  export PATH="/opt/homebrew/bin:$PATH"
+fi
+
 # ----------------------------------------------------------------
 # local bins
+# ----------------------------------------------------------------
 export PATH="$HOME/.local/bin:$PATH"
 
 # ----------------------------------------------------------------
@@ -73,33 +91,22 @@ export PATH=$PATH:$HOME/.govm/go/bin
 # macOS
 # ----------------------------------------------------------------
 if [[ $(uname) == "Darwin" ]]; then
-  # ----------------------------------------------------------------
-  # Some Homebrew stuff
-  export PATH="/usr/local/sbin::$PATH"
 
-  # ----------------------------------------------------------------
-  # Homebrew x64
-  # all under /usr/local
-
-  # ----------------------------------------------------------------
-  # Homebrew arm64
-  export PATH="/opt/homebrew/bin:$PATH"
-
-  # ----------------------------------------------------------------
+  # ----------------
   # VS Code
   export PATH="/Applications/Visual Studio Code.app/Contents/Resources/app/bin:$PATH"
 
-  # # ----------------------------------------------------------------
+  # # ----------------
   # # Qt
   # export PATH="/usr/local/sbin:$PATH"
   # export PATH="/usr/local/opt/qt/bin:$PATH"
 
-  # # ----------------------------------------------------------------
+  # # ----------------
   # Setting PATH for Python 2.7
   # The original version is saved in .zprofile.pysave
   export PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:${PATH}"
 
-  # ----------------------------------------------------------------
+  # ----------------
   # STM32
   export STM32CubeMX_PATH=/Applications/STMicroelectronics/STM32CubeMX.app/Contents/Resources
 
@@ -108,7 +115,7 @@ if [[ $(uname) == "Darwin" ]]; then
 # ----------------------------------------------------------------
 elif command -v apt > /dev/null; then
 
-  # ----------------------------------------------------------------
+  # ----------------
 
   export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
 
