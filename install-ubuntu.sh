@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-sudo apt-add-repository ppa:git-core/ppa
+sudo apt-add-repository -y ppa:git-core/ppa
 
 sudo apt update
 
@@ -31,6 +31,17 @@ sudo apt install -y \
   seahorse \
   pinentry-curses
 
+# openvpn
+sudo apt install -y \
+  openvpn
+
+# if desktop version then add ovpn in network manager gui
+dpkg -l network-manager > /dev/null 2>&1
+if [[ $? -eq 0 ]]; then
+  sudo apt install -y \
+    network-manager-openvpn
+fi
+
 # nvm
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.5/install.sh | bash
 
@@ -52,3 +63,14 @@ git clone https://github.com/lukechilds/zsh-better-npm-completion ${ZSH_CUSTOM:-
 chsh -s $(which zsh)
 # source ~/.zshrc
 
+read -p "Enter email for SSH and GPG: " promt_email
+read -p "Enter GPG signing key for git: " promt_gpg_signingkey
+
+ssh-keygen -t ed25519 -C "$promt_email"
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_ed25519
+
+gpg --full-generate-key
+
+git config --global user.signingkey $promt_gpg_signingkey
+git config --global user.email "$promt_email"
