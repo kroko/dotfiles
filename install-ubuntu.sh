@@ -104,6 +104,14 @@ if sudo dmesg | grep -q qemu; then
     qemu-guest-agent \
     spice-webdavd
 
+  sudo apt install -y \
+    mesa-utils \
+    libgl1-mesa-dri \
+    libgles2-mesa-dev
+
+  glxinfo -B
+  echo $XDG_SESSION_TYPE
+
   if ! grep -q '/mnt/utm' /etc/fstab ; then
     mkdir -p $HOME/utm
     sudo mkdir -p /mnt/utm
@@ -150,3 +158,12 @@ chmod 644 ~/.ssh/*.pub
 
 # nvm
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.5/install.sh | bash
+
+
+# /etc/default/grub
+# GRUB_CMDLINE_LINUX="apparmor=0"
+# sudo update-grub
+
+# sudo systemctl stop apparmor
+# sudo systemctl disable apparmor
+aa-status
