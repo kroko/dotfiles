@@ -79,7 +79,7 @@ if [ -d ~/.oh-my-zsh ]; then
   echo "oh-my-zsh is installed"
 else
   echo "oh-my-zsh is not installed, installing"
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 fi
 
 # install oh my zsh plugins
