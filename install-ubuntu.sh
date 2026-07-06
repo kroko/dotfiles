@@ -44,6 +44,10 @@ sudo apt install -y \
   unzip \
   bzip2
 
+# wayland clipboard
+sudo apt install -y \
+  wl-clipboard
+
 # zsh
 sudo apt install -y \
   zsh
