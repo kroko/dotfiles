@@ -44,10 +44,6 @@ sudo apt install -y \
   unzip \
   bzip2
 
-# wayland clipboard
-sudo apt install -y \
-  wl-clipboard
-
 # zsh
 sudo apt install -y \
   zsh
@@ -171,3 +167,4 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.5/install.sh | bash
 # sudo systemctl stop apparmor
 # sudo systemctl disable apparmor
 aa-status
+
