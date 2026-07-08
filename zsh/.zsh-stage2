@@ -107,6 +107,7 @@ if [[ $(uname) == "Darwin" ]]; then
     zsh-autosuggestions
     history-substring-search
     zsh-syntax-highlighting
+    zsh-uv-env
   )
   autoload -U compinit && compinit
 
@@ -124,6 +125,7 @@ elif command -v apt > /dev/null; then
     zsh-autosuggestions
     history-substring-search
     zsh-syntax-highlighting
+    zsh-uv-env
   )
   autoload -U compinit && compinit
 
