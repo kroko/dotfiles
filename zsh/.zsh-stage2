@@ -77,18 +77,9 @@ ZSH_THEME="gnzh"
 # Add wisely, as too many plugins slow down shell startup.
 # plugins=(git)
 
-  # osx
+
   # sudo
   # jsontools
-
-# plugins=(
-#   git
-#   zsh-better-npm-completion
-#   zsh-completions
-#   zsh-autosuggestions
-#   history-substring-search
-#   zsh-syntax-highlighting
-# )
 
 # ----------------------------------------------------------------
 # macOS
@@ -97,9 +88,9 @@ if [[ $(uname) == "Darwin" ]]; then
   plugins=(
     macos
     brew
+    git
     docker
     docker-compose
-    git
     colored-man-pages
     colorize
     zsh-better-npm-completion
@@ -119,6 +110,7 @@ elif command -v apt > /dev/null; then
   plugins=(
     git
     docker
+    docker-compose
     colored-man-pages
     colorize
     zsh-better-npm-completion
