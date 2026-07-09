@@ -1,138 +1,148 @@
 
 # .zlogin
 
-# ================================
-# COMMON
-# ================================
-
-# ================================
-kroko_print_div_embedded "GPG agent status"
-echo "GPG agent status"
-if command_exists gpg-agent ; then
-  # if gpg-agent | grep -q "running and available"; then
-  gpg-agent
-else
-  echo "NOT FOUND"
-fi
-
-# ================================
-kroko_print_div_embedded "node.js (via nvm)"
-if command_exists nvm ; then
-  echo "Listing local"
-  nvm list
-else
-  echo "NOT FOUND"
-fi
-
-# ================================
-kroko_print_div_embedded "python installed (via uv)"
-if command_exists uv; then
-  uv --version
-  uv python list --only-installed
-else
-  echo "NOT FOUND"
-fi
-
-# ================================
-kroko_print_div_embedded "rust (via rustup)"
-if command_exists rustup ; then
-  rustc --version 2>/dev/null
-  cargo --version 2>/dev/null
-  echo "Listing rustup:"
-  rustup show 2>/dev/null
-else
-  echo "NOT FOUND"
-fi
-
-# ================================
-kroko_print_div_embedded "go (via govm)"
-if command_exists govm && command_exists go ; then
-  echo "Listing instaled versions"
-  govm list | grep -oE '\*[[:space:]]*go[^[:space:]]+' | sed 's/.*go/go/'
-  echo "Current in env"
-  go version
-else
-  echo "NOT FOUND"
-fi
-
-# ================================
-kroko_print_div_embedded "PHP (via phpvm)"
-if command_exists phpvm ; then
-  phpvm list
-else
-  echo "NOT FOUND"
-fi
-
-# ================================
-kroko_print_div_embedded "composer"
-if command_exists composer ; then
-  composer -V
-else
-  echo "NOT FOUND"
-fi
-
-# # ================================
-# kroko_print_div_simple
-# echo "Listing ruby versions"
-# rbenv versions
-# echo "Listing ruby version set"
-# rbenv version
-# echo "Listing current ruby global"
-# rbenv global
-
-
-
-
-# ================================
-# macOS
-# ================================
-if [[ $(uname) == "Darwin" ]]; then
+kroko_info() {
+  # ================================
+  # COMMON
+  # ================================
 
   # ================================
-  kroko_print_div_embedded "Docker"
-  if command_exists docker ; then
-    echo "Listing containers"
-    docker container ls
+  kroko_print_div_embedded "GPG agent status"
+  if command_exists gpg-agent ; then
+    # if gpg-agent | grep -q "running and available"; then
+    gpg-agent
   else
     echo "NOT FOUND"
   fi
 
-# ================================
-# Debian Ubuntu
-# ================================
-elif command -v apt > /dev/null; then
-
   # ================================
-  kroko_print_div_embedded "Docker"
-  if command_exists docker ; then
-  if [ $EUID -eq 0 ] || (groups | grep docker &> /dev/null); then
-    echo "Listing containers"
-    docker container ls
-  else
-    echo "No permissions for Docker"
-  fi
+  kroko_print_div_embedded "node.js (via nvm)"
+  if command_exists nvm ; then
+    echo "Listing local"
+    nvm list
   else
     echo "NOT FOUND"
   fi
 
+  # ================================
+  kroko_print_div_embedded "python installed (via uv)"
+  if command_exists uv; then
+    uv --version
+    uv python list --only-installed
+  else
+    echo "NOT FOUND"
+  fi
 
-# ================================
-# Unknown
-# ================================
-else
+  # ================================
+  kroko_print_div_embedded "rust (via rustup)"
+  if command_exists rustup ; then
+    rustc --version 2>/dev/null
+    cargo --version 2>/dev/null
+    echo "Listing rustup:"
+    rustup show 2>/dev/null
+  else
+    echo "NOT FOUND"
+  fi
+
+  # ================================
+  kroko_print_div_embedded "go (via govm)"
+  if command_exists govm && command_exists go ; then
+    echo "Listing instaled versions"
+    govm list | grep -oE '\*[[:space:]]*go[^[:space:]]+' | sed 's/.*go/go/'
+    echo "Current in env"
+    go version
+  else
+    echo "NOT FOUND"
+  fi
+
+  # ================================
+  kroko_print_div_embedded "PHP (via phpvm)"
+  if command_exists phpvm ; then
+    phpvm list
+  else
+    echo "NOT FOUND"
+  fi
+
+  # ================================
+  kroko_print_div_embedded "composer"
+  if command_exists composer ; then
+    composer -V
+  else
+    echo "NOT FOUND"
+  fi
+
+  # # ================================
+  # kroko_print_div_simple
+  # echo "Listing ruby versions"
+  # rbenv versions
+  # echo "Listing ruby version set"
+  # rbenv version
+  # echo "Listing current ruby global"
+  # rbenv global
+
+
+
+
+  # ================================
+  # macOS
+  # ================================
+  if [[ $(uname) == "Darwin" ]]; then
+
+    # ================================
+    kroko_print_div_embedded "Docker"
+    if command_exists docker ; then
+      echo "Listing containers"
+      docker container ls
+    else
+      echo "NOT FOUND"
+    fi
+
+  # ================================
+  # Debian Ubuntu
+  # ================================
+  elif command -v apt > /dev/null; then
+
+    # ================================
+    kroko_print_div_embedded "Docker"
+    if command_exists docker ; then
+    if [ $EUID -eq 0 ] || (groups | grep docker &> /dev/null); then
+      echo "Listing containers"
+      docker container ls
+    else
+      echo "No permissions for Docker"
+    fi
+    else
+      echo "NOT FOUND"
+    fi
+
+
+  # ================================
+  # Unknown
+  # ================================
+  else
+    # ================================
+    kroko_print_div_simple
+    echo "Unknown OS"
+  fi
+
+  # ================================
+  # figlet
   # ================================
   kroko_print_div_simple
-  echo "Unknown OS"
-fi
+  if [[ $(uname) == "Darwin" ]]; then
+    figlet kroko @ macos 2>/dev/null
+  elif command -v apt > /dev/null; then
+    figlet kroko @ debian 2>/dev/null
+  else
+    figlet kroko @ unknown 2>/dev/null
+  fi
+}
 
-# ================================
-# figlet
-# ================================
-kroko_print_div_simple
-if [[ $(uname) == "Darwin" ]]; then
-  figlet kroko @ macos 2>/dev/null
-elif command -v apt > /dev/null; then
-  figlet kroko @ debian 2>/dev/null
-else
-  figlet kroko @ unknown 2>/dev/null
+if [ -e $HOME/.zlog-counter ]; then
+  local count=$(<$HOME/.zlog-counter)  # Replace 'filename' with your actual file name
+  if [[ $count -eq 1 ]]; then
+    return 0
+  fi
+  echo "1" > $HOME/.zlog-counter
+  kroko_info
 fi
