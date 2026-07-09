@@ -6,7 +6,7 @@
 # ================================
 
 # ================================
-printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
+kroko_print_div_embedded "GPG agent status"
 echo "GPG agent status"
 if command_exists gpg-agent ; then
   # if gpg-agent | grep -q "running and available"; then
@@ -16,8 +16,7 @@ else
 fi
 
 # ================================
-printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
-echo "node.js (via nvm)"
+kroko_print_div_embedded "node.js (via nvm)"
 if command_exists nvm ; then
   echo "Listing local"
   nvm list
@@ -26,8 +25,7 @@ else
 fi
 
 # ================================
-printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
-echo "python installed (via uv)"
+kroko_print_div_embedded "python installed (via uv)"
 if command_exists uv; then
   uv --version
   uv python list --only-installed
@@ -36,8 +34,7 @@ else
 fi
 
 # ================================
-printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
-echo "rust (via rustup)"
+kroko_print_div_embedded "rust (via rustup)"
 if command_exists rustup ; then
   rustc --version 2>/dev/null
   cargo --version 2>/dev/null
@@ -48,8 +45,7 @@ else
 fi
 
 # ================================
-printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
-echo "go (via govm)"
+kroko_print_div_embedded "go (via govm)"
 if command_exists govm && command_exists go ; then
   echo "Listing instaled versions"
   govm list | grep -oE '\*[[:space:]]*go[^[:space:]]+' | sed 's/.*go/go/'
@@ -60,8 +56,7 @@ else
 fi
 
 # ================================
-printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
-echo "PHP (via phpvm)"
+kroko_print_div_embedded "PHP (via phpvm)"
 if command_exists phpvm ; then
   phpvm list
 else
@@ -69,8 +64,7 @@ else
 fi
 
 # ================================
-printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
-echo "composer"
+kroko_print_div_embedded "composer"
 if command_exists composer ; then
   composer -V
 else
@@ -78,7 +72,7 @@ else
 fi
 
 # # ================================
-# printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
+# kroko_print_div_simple
 # echo "Listing ruby versions"
 # rbenv versions
 # echo "Listing ruby version set"
@@ -95,8 +89,7 @@ fi
 if [[ $(uname) == "Darwin" ]]; then
 
   # ================================
-  printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
-  echo "Docker"
+  kroko_print_div_embedded "Docker"
   if command_exists docker ; then
     echo "Listing containers"
     docker container ls
@@ -110,8 +103,7 @@ if [[ $(uname) == "Darwin" ]]; then
 elif command -v apt > /dev/null; then
 
   # ================================
-  printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
-  echo "Docker"
+  kroko_print_div_embedded "Docker"
   if command_exists docker ; then
   if [ $EUID -eq 0 ] || (groups | grep docker &> /dev/null); then
     echo "Listing containers"
@@ -129,14 +121,14 @@ elif command -v apt > /dev/null; then
 # ================================
 else
   # ================================
-  printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
+  kroko_print_div_simple
   echo "Unknown OS"
 fi
 
 # ================================
 # figlet
 # ================================
-printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
+kroko_print_div_simple
 if [[ $(uname) == "Darwin" ]]; then
   figlet kroko @ macos 2>/dev/null
 elif command -v apt > /dev/null; then

@@ -98,6 +98,8 @@ omz reload
 echo "================"
 echo "php"
 curl -o- https://raw.githubusercontent.com/Thavarshan/phpvm/main/install.sh | bash
+phpvm install latest-remote
+phpvm use
 
 echo "================"
 echo "composer"
