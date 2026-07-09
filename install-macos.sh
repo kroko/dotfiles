@@ -60,8 +60,7 @@ echo "================"
 echo "rust via rustup"
 
 if ! command -v rustup; then
-  # curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-  brew install rustup
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
   . "$HOME/.cargo/env"
   rustc --version
   cargo --version
@@ -72,6 +71,11 @@ else
 fi
 
 echo "================"
+echo "python via uv"
+
+curl -LsSf https://astral.sh/uv/install.sh | less
+
+echo "================"
 echo "go via govm"
 
 if ! command -v govm; then
@@ -79,13 +83,6 @@ if ! command -v govm; then
 else
   echo "already setup"
 fi
-
-echo "================"
-echo "python via uv"
-
-# curl -LsSf https://astral.sh/uv/install.sh | less
-brew install \
-  uv
 
 echo "================"
 echo "node via nvm"
