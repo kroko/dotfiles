@@ -145,4 +145,6 @@ if [ -e $HOME/.zlog-counter ]; then
   fi
   echo "1" > $HOME/.zlog-counter
   kroko_info
+else
+  kroko_info
 fi
