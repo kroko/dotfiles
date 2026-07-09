@@ -45,8 +45,9 @@ printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
 echo "rust (via rustup)"
 if command_exists rustup ; then
     echo "Listing:"
-    rustup show 2>/dev/null
+    rustc --version 2>/dev/null
     cargo --version 2>/dev/null
+    rustup show 2>/dev/null
 else
     echo "NOT FOUND"
 fi

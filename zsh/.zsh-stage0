@@ -34,10 +34,10 @@ if [[ $(uname) == "Darwin" ]]; then
   # Some Homebrew stuff
   export PATH="/usr/local/sbin:$PATH"
   # ----------------
-  # Homebrew x64
-  # all under /usr/local
-  # ----------------
-  # Homebrew arm64
+  # Homebrew
+  # x64   /usr/local
+  export PATH="/usr/local/bin:$PATH"
+  # arm   /opt/homebrew/bin
   export PATH="/opt/homebrew/bin:$PATH"
 fi
 
@@ -82,6 +82,14 @@ export PATH=$PATH:$HOME/.govm/go/bin
 
 # ----------------------------------------------------------------
 # rustup
+# ----------------------------------------------------------------
+
+if [[ $(uname) == "Darwin" ]]; then
+  # this is only if installed via brew
+  # brew ls --versions rustup > /dev/null -a
+  export PATH=$(brew --prefix rustup)/bin:"$PATH"
+fi
+
 . "$HOME/.cargo/env" 2>/dev/null
 
 # # ----------------------------------------------------------------
