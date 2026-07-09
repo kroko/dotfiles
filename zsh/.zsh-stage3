@@ -68,6 +68,15 @@ else
   echo "NOT FOUND"
 fi
 
+# ================================
+printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
+echo "composer"
+if command_exists composer ; then
+  composer -V
+else
+  echo "NOT FOUND"
+fi
+
 # # ================================
 # printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
 # echo "Listing ruby versions"
@@ -76,6 +85,9 @@ fi
 # rbenv version
 # echo "Listing current ruby global"
 # rbenv global
+
+
+
 
 # ================================
 # macOS
