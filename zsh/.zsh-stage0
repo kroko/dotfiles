@@ -63,6 +63,9 @@ export PATH="$HOME/.composer/vendor/bin:$PATH"
 # ----------------------------------------------------------------
 # uv python
 
+# startup file for interactive python interpreter
+export PYTHONSTARTUP=$HOME/.python-startup
+
 # ----------------------------------------------------------------
 # govm for Golang
 # https://github.com/sbonaiva/govm
