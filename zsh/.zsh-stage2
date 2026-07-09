@@ -130,7 +130,7 @@ elif command -v apt > /dev/null; then
 # Unknown
 # ================================
 else
-    echo 'Unknown OS!'
+  echo 'Unknown OS!'
 fi
 
 # ================================
@@ -222,90 +222,90 @@ command_exists () {
 # https://unix.stackexchange.com/a/771364/221829
 
 function choose_from_menu_zsh() {
-    local prompt="$1" outidx="$2" outval="$3"
-    shift
-    shift
-    shift
-    # count had to be assigned the pure number of arguments
-    local options=("$@") cur=1 count=$# index=0
-    local esc=$(echo -en "\033") # cache ESC as test doesn't allow esc codes
-    echo -n "$prompt"
+  local prompt="$1" outidx="$2" outval="$3"
+  shift
+  shift
+  shift
+  # count had to be assigned the pure number of arguments
+  local options=("$@") cur=1 count=$# index=0
+  local esc=$(echo -en "\033") # cache ESC as test doesn't allow esc codes
+  echo -n "$prompt"
 
-    function __clamp()
-    {
-      [ "$cur" -lt 1 ] && cur=1
-      [ "$cur" -gt $count ] && cur=$count
-    }
-    function __move_up()
-    {
-      cur=$(( $cur - 1 ))
-      __clamp
-    }
-    function __move_down()
-    {
-      cur=$(( $cur + 1 ))
-      __clamp
-    }
+  function __clamp()
+  {
+    [ "$cur" -lt 1 ] && cur=1
+    [ "$cur" -gt $count ] && cur=$count
+  }
+  function __move_up()
+  {
+    cur=$(( $cur - 1 ))
+    __clamp
+  }
+  function __move_down()
+  {
+    cur=$(( $cur + 1 ))
+    __clamp
+  }
 
-    # measure the rows of the menu, needed for erasing those rows when moving
-    # the selection
-    menu_rows=$#
-    total_rows=$(($menu_rows + 1))
-    while true; do
-      index=1
-      for o in "${options[@]}"
-      do
-          if [[ "$index" == "$cur" ]]
-          then echo -e " \033[38;5;41m> \033[0m\033[38;5;35m$o\033[0m" # mark & highlight the current option
-          else echo "   $o"
-          fi
-          index=$(( $index + 1 ))
-      done
-      printf "\n"
-
-      # set mark for cursor
-      printf "\033[s"
-
-      read -rsnk key # -rsk
-      if [[ "${key}" == $'\n' || $key == '' ]]; then
-        break
-      elif [[ $key == k ]]; then # || $key == l
-        __move_up
-      elif [[ $key == j ]]; then # || $key == h
-        __move_down
-      elif [[ "${key}" == $'\x1B' ]]; then
-        read -rsnk -t 0.1 input
-        if [[ "$input" = "[" || "$input" = "O" ]]; then
-          read -rsnk input # -t 0.1
-          case "$input"
-          in
-            A) __move_up   ;;
-            B) __move_down ;;
-            # C) __move_down ;;
-            # D) __move_up ;;
-          esac
-        # elif [ "$input" = "" ]; then
-        else
-          echo -n "Abort\n\n"
-          cur=0
-          break
+  # measure the rows of the menu, needed for erasing those rows when moving
+  # the selection
+  menu_rows=$#
+  total_rows=$(($menu_rows + 1))
+  while true; do
+    index=1
+    for o in "${options[@]}"
+    do
+        if [[ "$index" == "$cur" ]]
+        then echo -e " \033[38;5;41m> \033[0m\033[38;5;35m$o\033[0m" # mark & highlight the current option
+        else echo "   $o"
         fi
-        # flushing stdin
-        # read -rsnk # -t 0.1
-      fi
-      # move back to saved cursor position
-      printf "\033[u"
-      # erase all lines of selections to build them again with new positioning
-      for ((i = 0; i < $total_rows; i++)); do
-          printf "\033[2k\r"
-          printf "\033[F"
-      done
+        index=$(( $index + 1 ))
     done
-    # pass choosen selection to main body of script
-    eval $outidx=$cur
-    if [ $cur -ne 0 ]; then
-      eval $outval="'${options[$cur]}'"
+    printf "\n"
+
+    # set mark for cursor
+    printf "\033[s"
+
+    read -rsnk key # -rsk
+    if [[ "${key}" == $'\n' || $key == '' ]]; then
+      break
+    elif [[ $key == k ]]; then # || $key == l
+      __move_up
+    elif [[ $key == j ]]; then # || $key == h
+      __move_down
+    elif [[ "${key}" == $'\x1B' ]]; then
+      read -rsnk -t 0.1 input
+      if [[ "$input" = "[" || "$input" = "O" ]]; then
+        read -rsnk input # -t 0.1
+        case "$input"
+        in
+          A) __move_up   ;;
+          B) __move_down ;;
+          # C) __move_down ;;
+          # D) __move_up ;;
+        esac
+      # elif [ "$input" = "" ]; then
+      else
+        echo -n "Abort\n\n"
+        cur=0
+        break
+      fi
+      # flushing stdin
+      # read -rsnk # -t 0.1
     fi
+    # move back to saved cursor position
+    printf "\033[u"
+    # erase all lines of selections to build them again with new positioning
+    for ((i = 0; i < $total_rows; i++)); do
+        printf "\033[2k\r"
+        printf "\033[F"
+    done
+  done
+  # pass choosen selection to main body of script
+  eval $outidx=$cur
+  if [ $cur -ne 0 ]; then
+    eval $outval="'${options[$cur]}'"
+  fi
 }
 
 # ================================

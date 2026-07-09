@@ -9,54 +9,54 @@
 printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
 echo "GPG agent status"
 if command_exists gpg-agent ; then
-    # if gpg-agent | grep -q "running and available"; then
-    gpg-agent
+  # if gpg-agent | grep -q "running and available"; then
+  gpg-agent
 else
-    echo "NOT FOUND"
+  echo "NOT FOUND"
 fi
 
 # ================================
 printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
 echo "node.js (via nvm)"
 if command_exists nvm ; then
-    echo "Listing local"
-    nvm list
+  echo "Listing local"
+  nvm list
 else
-    echo "NOT FOUND"
+  echo "NOT FOUND"
 fi
 
 # ================================
 printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
 echo "python installed (via uv)"
 if command_exists uv; then
-    uv --version
-    uv python list --only-installed
+  uv --version
+  uv python list --only-installed
 else
-    echo "NOT FOUND"
+  echo "NOT FOUND"
 fi
 
 # ================================
 printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
 echo "rust (via rustup)"
 if command_exists rustup ; then
-    rustc --version 2>/dev/null
-    cargo --version 2>/dev/null
-    echo "Listing rustup:"
-    rustup show 2>/dev/null
+  rustc --version 2>/dev/null
+  cargo --version 2>/dev/null
+  echo "Listing rustup:"
+  rustup show 2>/dev/null
 else
-    echo "NOT FOUND"
+  echo "NOT FOUND"
 fi
 
 # ================================
 printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
 echo "go (via govm)"
 if command_exists govm && command_exists go ; then
-    echo "Listing instaled versions"
-    govm list | grep -oE '\*[[:space:]]*go[^[:space:]]+' | sed 's/.*go/go/'
-    echo "Current in env"
-    go version
+  echo "Listing instaled versions"
+  govm list | grep -oE '\*[[:space:]]*go[^[:space:]]+' | sed 's/.*go/go/'
+  echo "Current in env"
+  go version
 else
-    echo "NOT FOUND"
+  echo "NOT FOUND"
 fi
 
 # ================================
@@ -86,10 +86,10 @@ if [[ $(uname) == "Darwin" ]]; then
   printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
   echo "Docker"
   if command_exists docker ; then
-      echo "Listing containers"
-      docker container ls
+    echo "Listing containers"
+    docker container ls
   else
-      echo "NOT FOUND"
+    echo "NOT FOUND"
   fi
 
 # ================================
@@ -101,14 +101,14 @@ elif command -v apt > /dev/null; then
   printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
   echo "Docker"
   if command_exists docker ; then
-    if [ $EUID -eq 0 ] || (groups | grep docker &> /dev/null); then
-      echo "Listing containers"
-      docker container ls
-    else
-      echo "No permissions for Docker"
-    fi
+  if [ $EUID -eq 0 ] || (groups | grep docker &> /dev/null); then
+    echo "Listing containers"
+    docker container ls
   else
-      echo "NOT FOUND"
+    echo "No permissions for Docker"
+  fi
+  else
+    echo "NOT FOUND"
   fi
 
 

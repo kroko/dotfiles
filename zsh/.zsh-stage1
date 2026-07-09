@@ -3,7 +3,7 @@
 # ================================
 # gpg
 if command -v gpgconf > /dev/null ; then
-    gpgconf --launch gpg-agent
+  gpgconf --launch gpg-agent
 fi
 
 # ================================
@@ -31,9 +31,9 @@ fi
 # uv python
 
 if command -v uv > /dev/null ; then
-    # https://docs.astral.sh/uv/getting-started/installation/
-    eval "$(uv generate-shell-completion zsh)"
-    eval "$(uvx --generate-shell-completion zsh)"
+  # https://docs.astral.sh/uv/getting-started/installation/
+  eval "$(uv generate-shell-completion zsh)"
+  eval "$(uvx --generate-shell-completion zsh)"
 fi
 
 # ================================
