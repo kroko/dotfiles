@@ -4,22 +4,12 @@
 # → .zlogin, if login shell         macos YES, Ubuntu NOT
 # → .zlogout, if login shell
 
-# ----------------------------------------------------------------
-# macOS
-# ----------------------------------------------------------------
 if [[ $(uname) == "Darwin" ]]; then
-source $HOME/.zsh-stage2
-
-# ----------------------------------------------------------------
-# Debian Ubuntu
-# ----------------------------------------------------------------
+  source $HOME/.zsh-stage2
 elif command -v apt > /dev/null; then
-source $HOME/.zsh-stage2
-source $HOME/.zsh-stage3
-
-# ----------------------------------------------------------------
-# Unknown
-# ----------------------------------------------------------------
+  source $HOME/.zsh-stage1
+  source $HOME/.zsh-stage2
+  source $HOME/.zsh-stage3
 else
-    echo 'Unknown OS!'
+  echo 'Unknown OS!'
 fi

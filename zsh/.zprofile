@@ -4,4 +4,6 @@
 # → .zlogin, if login shell         macos YES, Ubuntu NOT
 # → .zlogout, if login shell
 
-# use .zshrc
+if [[ $(uname) == "Darwin" ]]; then
+  source $HOME/.zsh-stage1
+fi

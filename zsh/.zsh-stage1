@@ -1,0 +1,37 @@
+# .zprofile
+
+# ----------------------------------------------------------------
+# gpg
+if command -v gpgconf > /dev/null ; then
+    gpgconf --launch gpg-agent
+fi
+
+# ----------------------------------------------------------------
+# NVM
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# ----------------------------------------------------------------
+# rustup
+# ----------------------------------------------------------------
+
+# # this is only if rustup is installed via brew, which we are not doing, using official script
+# if [[ $(uname) == "Darwin" ]] ; then
+#   export PATH=$(brew --prefix rustup)/bin:"$PATH"
+# fi
+
+. "$HOME/.cargo/env" 2>/dev/null
+
+if command -v rustup > /dev/null ; then
+  mkdir -p $HOME/.zfunc
+  rustup completions zsh > ~/.zfunc/_rustup
+fi
+
+# ----------------------------------------------------------------
+# uv python
+
+if command -v uv > /dev/null ; then
+    # https://docs.astral.sh/uv/getting-started/installation/
+    eval "$(uv generate-shell-completion zsh)"
+    eval "$(uvx --generate-shell-completion zsh)"
+fi

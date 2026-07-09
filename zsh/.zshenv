@@ -4,4 +4,5 @@
 # → .zlogin, if login shell         macos YES, Ubuntu NOT
 # → .zlogout, if login shell
 
+# all targets source this
 source $HOME/.zsh-stage0

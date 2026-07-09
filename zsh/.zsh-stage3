@@ -1,9 +1,20 @@
 
-# echo ".zsh-stage3 -- in"
+# .zlogin
 
 # ----------------------------------------------------------------
 # COMMON
 # ----------------------------------------------------------------
+
+# ----------------------------------------------------------------
+printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
+echo "GPG agent status"
+# in zprofile export GPG_TTY=`tty`
+if command_exists gpg-agent ; then
+    # if gpg-agent | grep -q "running and available"; then
+    gpg-agent
+else
+    echo "NOT FOUND"
+fi
 
 # ----------------------------------------------------------------
 printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
@@ -17,25 +28,10 @@ fi
 
 # ----------------------------------------------------------------
 printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
-echo "python (via uv)"
+echo "python installed (via uv)"
 if command_exists uv; then
-    # https://docs.astral.sh/uv/getting-started/installation/
-    eval "$(uv generate-shell-completion zsh)"
-    eval "$(uvx --generate-shell-completion zsh)"
     uv --version
-    uv python list
-else
-    echo "NOT FOUND"
-fi
-
-# ----------------------------------------------------------------
-printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
-echo "go (via govm)"
-if command_exists govm && command_exists go; then
-    echo "Listing instaled versions"
-    govm list | grep -oE '\*[[:space:]]*go[^[:space:]]+' | sed 's/.*go/go/'
-    echo "Current in env"
-    go version
+    uv python list --only-installed
 else
     echo "NOT FOUND"
 fi
@@ -44,10 +40,22 @@ fi
 printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
 echo "rust (via rustup)"
 if command_exists rustup ; then
-    echo "Listing:"
     rustc --version 2>/dev/null
     cargo --version 2>/dev/null
+    echo "Listing rustup:"
     rustup show 2>/dev/null
+else
+    echo "NOT FOUND"
+fi
+
+# ----------------------------------------------------------------
+printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
+echo "go (via govm)"
+if command_exists govm && command_exists go ; then
+    echo "Listing instaled versions"
+    govm list | grep -oE '\*[[:space:]]*go[^[:space:]]+' | sed 's/.*go/go/'
+    echo "Current in env"
+    go version
 else
     echo "NOT FOUND"
 fi
@@ -60,17 +68,6 @@ fi
 # rbenv version
 # echo "Listing current ruby global"
 # rbenv global
-
-# ----------------------------------------------------------------
-printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
-echo "GPG"
-# in zprofile export GPG_TTY=`tty`
-if command_exists gpgconf ; then
-    gpgconf --launch gpg-agent
-    echo "Launching"
-else
-    echo "NOT FOUND"
-fi
 
 # ----------------------------------------------------------------
 # macOS
@@ -86,10 +83,6 @@ if [[ $(uname) == "Darwin" ]]; then
   else
       echo "NOT FOUND"
   fi
-
-  # ----------------------------------------------------------------
-  printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
-  figlet kroko @ macos 2>/dev/null
 
 # ----------------------------------------------------------------
 # Debian Ubuntu
@@ -110,9 +103,6 @@ elif command -v apt > /dev/null; then
       echo "NOT FOUND"
   fi
 
-  # ----------------------------------------------------------------
-  printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
-  figlet kroko @ debian 2>/dev/null
 
 # ----------------------------------------------------------------
 # Unknown
@@ -120,7 +110,17 @@ elif command -v apt > /dev/null; then
 else
   # ----------------------------------------------------------------
   printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
-  figlet kroko @ unknown 2>/dev/null
+  echo "Unknown OS"
 fi
 
-# echo ".zsh-stage3 -- out"
+# ----------------------------------------------------------------
+# figlet
+# ----------------------------------------------------------------
+printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
+if [[ $(uname) == "Darwin" ]]; then
+  figlet kroko @ macos 2>/dev/null
+elif command -v apt > /dev/null; then
+  figlet kroko @ debian 2>/dev/null
+else
+  figlet kroko @ unknown 2>/dev/null
+fi
