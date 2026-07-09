@@ -94,3 +94,14 @@ source $HOME/.zprofile
 source $HOME/.zshrc
 source $HOME/.zlogin
 omz reload
+
+echo "================"
+echo "php"
+curl -o- https://raw.githubusercontent.com/Thavarshan/phpvm/main/install.sh | bash
+
+echo "================"
+echo "composer"
+
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php composer-setup.php --install-dir=$HOME/.local/bin --filename=composer
+php -r "unlink('composer-setup.php');"

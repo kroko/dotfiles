@@ -35,3 +35,9 @@ if command -v uv > /dev/null ; then
     eval "$(uv generate-shell-completion zsh)"
     eval "$(uvx --generate-shell-completion zsh)"
 fi
+
+# ================================
+# phpvm for PHP
+if [[ -s "$PHPVM_DIR/phpvm.sh" ]]; then
+  source "$PHPVM_DIR/phpvm.sh"
+fi

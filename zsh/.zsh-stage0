@@ -66,6 +66,11 @@ export PATH=$PATH:$HOME/.govm/go/bin
 # export GOPATH="$HOME/.go/go"; export GOROOT="$HOME/.go/root"; export PATH="$GOPATH/bin:$PATH";
 # alias govm="$GOPATH/bin/g";
 
+# ================================
+# phpvm for PHP
+export PHPVM_DIR="/Users/reinis/.phpvm"
+export PATH="$PHPVM_DIR/bin:$PATH"
+
 # # ================================
 # # Ruby
 # export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
@@ -76,6 +81,7 @@ export PATH=$PATH:$HOME/.govm/go/bin
 # macOS
 # ================================
 if [[ $(uname) == "Darwin" ]]; then
+
 
   # ----------------
   # VS Code

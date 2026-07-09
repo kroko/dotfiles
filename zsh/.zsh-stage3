@@ -59,6 +59,15 @@ else
     echo "NOT FOUND"
 fi
 
+# ================================
+printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
+echo "PHP (via phpvm)"
+if command_exists phpvm ; then
+  phpvm list
+else
+  echo "NOT FOUND"
+fi
+
 # # ================================
 # printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
 # echo "Listing ruby versions"
