@@ -44,6 +44,10 @@ sudo apt install -y \
   unzip \
   bzip2
 
+if [[ $XDG_SESSION_TYPE == "wayland" ]]; then
+  sudo apt install -y \
+    wl-clipboard
+fi
 # zsh
 sudo apt install -y \
   zsh
