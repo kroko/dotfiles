@@ -20,8 +20,6 @@ fi
 #   export PATH=$(brew --prefix rustup)/bin:"$PATH"
 # fi
 
-. "$HOME/.cargo/env" 2>/dev/null
-
 if command -v rustup > /dev/null ; then
   mkdir -p $HOME/.zfunc
   rustup completions zsh > ~/.zfunc/_rustup

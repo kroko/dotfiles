@@ -44,7 +44,7 @@ export PATH="$HOME/.composer/vendor/bin:$PATH"
 # ================================
 # rustup
 # ================================
-#
+. "$HOME/.cargo/env" 2>/dev/null
 
 # ================================
 # uv python
