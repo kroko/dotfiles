@@ -6,4 +6,8 @@
 
 if [[ $(uname) == "Darwin" ]]; then
   source $HOME/.zsh-stage3
+else
+  echo 'this implementation sources .zlogin, but no scripts set!'
 fi
+
+return

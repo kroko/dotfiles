@@ -13,3 +13,5 @@ elif command -v apt > /dev/null; then
 else
   echo 'Unknown OS!'
 fi
+
+return

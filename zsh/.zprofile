@@ -6,4 +6,8 @@
 
 if [[ $(uname) == "Darwin" ]]; then
   source $HOME/.zsh-stage1
+else
+  echo 'this implementation sources .zprofile, but no scripts set!'
 fi
+
+return

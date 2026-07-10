@@ -6,3 +6,5 @@
 
 # all targets source this
 source $HOME/.zsh-stage0
+
+return
