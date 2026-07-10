@@ -73,7 +73,7 @@ fi
 echo "================"
 echo "python via uv"
 
-curl -LsSf https://astral.sh/uv/install.sh | less
+curl -LsSf https://astral.sh/uv/install.sh | sh
 
 echo "================"
 echo "go via govm"
