@@ -167,9 +167,44 @@ chmod 644 ~/.ssh/*.pub
 # git config --global user.signingkey $promt_gpg_signingkey
 # git config --global user.email "$promt_email"
 
-# nvm
+echo "================"
+echo "rust via rustup"
+
+if ! command -v rustup; then
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+  . "$HOME/.cargo/env"
+  rustc --version
+  cargo --version
+  mkdir -p $HOME/.zfunc
+  rustup completions zsh > ~/.zfunc/_rustup
+else
+  echo "already setup"
+fi
+
+echo "================"
+echo "python via uv"
+
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+echo "================"
+echo "go via govm"
+
+if ! command -v govm; then
+  curl -s "https://raw.githubusercontent.com/sbonaiva/govm/refs/heads/main/scripts/install.sh" | bash
+else
+  echo "already setup"
+fi
+
+echo "================"
+echo "node via nvm"
+
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.5/install.sh | bash
 
+source $HOME/.zshenv
+source $HOME/.zprofile
+source $HOME/.zshrc
+source $HOME/.zlogin
+omz reload
 
 # /etc/default/grub
 # GRUB_CMDLINE_LINUX="apparmor=0"
