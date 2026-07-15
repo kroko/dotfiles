@@ -46,11 +46,14 @@ kroko_info() {
 
   # ================================
   kroko_print_div_embedded "go (via govm)"
-  if command_exists govm && command_exists go ; then
-    echo "Listing instaled versions"
+  if command_exists govm ; then
     govm list | grep -oE '\*[[:space:]]*go[^[:space:]]+' | sed 's/.*go/go/'
-    echo "Current in env"
-    go version
+    if command_exists go ; then
+      echo "Current in env"
+      go version
+    else
+      echo "govm exists, but no go installed"
+    fi
   else
     echo "NOT FOUND"
   fi
