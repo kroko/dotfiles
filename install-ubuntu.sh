@@ -44,6 +44,17 @@ sudo apt install -y \
   unzip \
   bzip2
 
+# clang for clang tidy
+
+sudo apt install -y \
+  clang \
+  clang-format \
+  clang-tidy \
+  clang-tools \
+  clangd \
+  llvm \
+  bear
+
 if [[ $XDG_SESSION_TYPE == "wayland" ]]; then
   sudo apt install -y \
     wl-clipboard
