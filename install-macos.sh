@@ -11,6 +11,8 @@ echo "brew"
 if ! command -v brew; then
   echo "no brew, installing"
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  export PATH="/usr/local/bin:$PATH"
+  export PATH="/opt/homebrew/bin:$PATH"
 else
   echo "brew found"
 fi
@@ -73,7 +75,7 @@ fi
 echo "================"
 echo "python via uv"
 
-curl -LsSf https://astral.sh/uv/install.sh | sh
+curl -LsSf https://astral.sh/uv/install.sh | env NO_MODIFY_PATH=1 bash -s -- --no-modify-path
 
 echo "================"
 echo "go via govm"
