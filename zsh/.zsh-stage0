@@ -22,6 +22,8 @@ if [[ $(uname) == "Darwin" ]]; then
   export PATH="/usr/local/bin:$PATH"
   # arm
   export PATH="/opt/homebrew/bin:$PATH"
+  # export DYLD_FALLBACK_LIBRARY_PATH="$(brew --prefix)/lib:$DYLD_FALLBACK_LIBRARY_PATH"
+  export DYLD_FALLBACK_LIBRARY_PATH="/opt/homebrew/bin/lib:$DYLD_FALLBACK_LIBRARY_PATH"
 fi
 
 # ================================
