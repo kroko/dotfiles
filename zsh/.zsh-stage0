@@ -9,6 +9,15 @@
 # export EDITOR=vi
 
 # ================================
+# locale
+# ================================
+
+# /etc/ssh/ssh_config.d/100-macos.conf has SendEnv LANG LC_*
+# thus user level unsets (e.g. ~/.ssh/config.d/100-locale.conf) will not work
+if [[ $(uname) == "Darwin" ]]; then
+  export LC_CTYPE=en_US.UTF-8
+fi
+# ================================
 # homebrew bins
 # ================================
 
