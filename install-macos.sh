@@ -109,3 +109,8 @@ echo "composer"
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 php composer-setup.php --install-dir=$HOME/.local/bin --filename=composer
 php -r "unlink('composer-setup.php');"
+
+echo "================"
+echo "llm"
+curl -fsSL https://ollama.com/install.sh | sh
+curl -fsSL https://raw.githubusercontent.com/qaribhaider/ollama-to-lmstudio-symlinks/main/install.sh | bash
