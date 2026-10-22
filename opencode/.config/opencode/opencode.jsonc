@@ -1,8 +1,30 @@
 {
   "$schema": "https://opencode.ai/config.json",
   // Default model to use when no session or agent model is selected
-  "model": "ollama/qwen2.5-coder:14b",
+  // ----
+  //  bionic
+  // "model": "lmstudio/qwen/qwen3.8-27b",
+  // ----
+  // ollama
+  "model": "ollama/qwen3.8:27b-mlx",
   "ollama": {
     "num_ctx": 32768
+  },
+  // providers
+  "provider": {
+    "lmstudio": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "LM Studio (Local)",
+      "options": {
+        "baseURL": "http://localhost:1234/v1"
+      }
+    },
+    "ollama": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Ollama (Local)",
+      "options": {
+        "baseURL": "http://localhost:11434/v1"
+      }
+    }
   }
 }
