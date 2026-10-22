@@ -89,6 +89,10 @@ export PATH="$PHPVM_DIR/bin:$PATH"
 # eval "$(rbenv init -)"
 
 # ================================
+# opencode
+export PATH=$HOME/.opencode/bin:$PATH
+
+# ================================
 # macOS
 # ================================
 if [[ $(uname) == "Darwin" ]]; then
