@@ -1,11 +1,3 @@
-gpg-macos/.gnupg/
-!gpg-macos/.gnupg/gpg*
-
-gpg-linux/.gnupg/
-!gpg-linux/.gnupg/gpg*
-
-tinker/
-
 # Created by https://www.toptal.com/developers/gitignore/api/osx,less,node,sass,bower,grunt,linux,pydev,xcode,android,angular,eclipse,laravel,pycharm,vagrant,windows,composer,intellij,netbeans,phpstorm,textmate,webstorm,qtcreator,sublimetext,intellij+iml,visualstudio,androidstudio,git
 # Edit at https://www.toptal.com/developers/gitignore?templates=osx,less,node,sass,bower,grunt,linux,pydev,xcode,android,angular,eclipse,laravel,pycharm,vagrant,windows,composer,intellij,netbeans,phpstorm,textmate,webstorm,qtcreator,sublimetext,intellij+iml,visualstudio,androidstudio,git
 
@@ -1418,3 +1410,13 @@ FodyWeavers.xsd
 # Additional files built by Visual Studio
 
 # End of https://www.toptal.com/developers/gitignore/api/osx,less,node,sass,bower,grunt,linux,pydev,xcode,android,angular,eclipse,laravel,pycharm,vagrant,windows,composer,intellij,netbeans,phpstorm,textmate,webstorm,qtcreator,sublimetext,intellij+iml,visualstudio,androidstudio,git
+
+gpg-macos/.gnupg/
+!gpg-macos/.gnupg/gpg*
+
+gpg-linux/.gnupg/
+!gpg-linux/.gnupg/gpg*
+
+tinker/
+
+!.config/
