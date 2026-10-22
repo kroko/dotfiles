@@ -152,6 +152,15 @@ kroko_info() {
   fi
 
   # ================================
+  kroko_print_div_embedded "opencode"
+  if command_exists opencode ; then
+    echo "available models"
+    opencode models 2>/dev/null
+  else
+    echo "NOT FOUND"
+  fi
+
+  # ================================
   # figlet
   # ================================
   kroko_print_div_simple
