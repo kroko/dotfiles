@@ -141,6 +141,14 @@ kroko_info() {
   fi
 
   # ================================
+  kroko_print_div_embedded "ollama-symlinks"
+  if command_exists ollama-symlinks ; then
+     ollama-symlinks --version 2>/dev/null
+  else
+    echo "NOT FOUND"
+  fi
+
+  # ================================
   # figlet
   # ================================
   kroko_print_div_simple
