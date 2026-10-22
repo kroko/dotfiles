@@ -129,6 +129,18 @@ kroko_info() {
   fi
 
   # ================================
+  # local models
+  # ================================
+
+  # ================================
+  kroko_print_div_embedded "ollama"
+  if command_exists ollama ; then
+    ollama list 2>/dev/null
+  else
+    echo "NOT FOUND"
+  fi
+
+  # ================================
   # figlet
   # ================================
   kroko_print_div_simple
