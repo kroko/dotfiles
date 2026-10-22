@@ -114,4 +114,5 @@ echo "================"
 echo "llm"
 curl -fsSL https://ollama.com/install.sh | sh
 curl -fsSL https://raw.githubusercontent.com/qaribhaider/ollama-to-lmstudio-symlinks/main/install.sh | bash
- ollama pull qwen2.5-coder:14b
+ollama pull qwen2.5-coder:14b
+curl -fsSL https://opencode.ai/v2/install | bash
