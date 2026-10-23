@@ -8,7 +8,7 @@
   // ollama
   "model": "ollama/qwen3.8:27b-mlx",
   "ollama": {
-    "num_ctx": 32768
+    "num_ctx": 24576
   },
   // providers
   "provider": {
