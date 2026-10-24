@@ -133,6 +133,15 @@ kroko_info() {
   # ================================
 
   # ================================
+  kroko_print_div_embedded "lms"
+  if command_exists lms ; then
+    echo "available models"
+    lms ls 2>/dev/null
+  else
+    echo "NOT FOUND"
+  fi
+
+  # ================================
   kroko_print_div_embedded "ollama"
   if command_exists ollama ; then
     echo "available models"
@@ -173,13 +182,17 @@ kroko_info() {
   fi
 }
 
-if [ -e $HOME/.zlog-counter ]; then
-  local count=$(<$HOME/.zlog-counter)  # Replace 'filename' with your actual file name
-  if [[ $count -eq 1 ]]; then
-    return 0
-  fi
-  echo "1" > $HOME/.zlog-counter
-  kroko_info
-else
+# if [ -e $HOME/.zlog-counter ]; then
+#   local count=$(<$HOME/.zlog-counter)  # Replace 'filename' with your actual file name
+#   if [[ $count -eq 1 ]]; then
+#     return 0
+#   fi
+#   echo "1" > $HOME/.zlog-counter
+#   kroko_info
+# else
+#   kroko_info
+# fi
+
+if [ "${KROKO_ENV_PRINT_INFO:-}" = "1" ]; then
   kroko_info
 fi

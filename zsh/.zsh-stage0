@@ -88,6 +88,13 @@ export PATH="$PHPVM_DIR/bin:$PATH"
 # export PATH="$HOME/.rbenv/bin:$PATH"
 # eval "$(rbenv init -)"
 
+
+# ================================
+# lms LM Studio
+if [[ $(uname) == "Darwin" ]]; then
+  export PATH=$HOME/.lmstudio/bin:$PATH
+fi
+
 # ================================
 # ollama
 if [[ $(uname) == "Darwin" ]]; then

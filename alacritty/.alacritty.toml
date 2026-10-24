@@ -6,6 +6,10 @@
 
 live_config_reload = true
 
+[env]
+KROKO_ENV_TERM = "alacritty"
+KROKO_ENV_PRINT_INFO = 1
+
 [window]
 padding = { x = 10, y = 10}
 option_as_alt = "Both" # Default: "None"
