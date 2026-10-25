@@ -28,7 +28,7 @@ kroko_info() {
   fi
 
   # ================================
-  kroko_print_div_embedded "python installed (via uv)"
+  kroko_print_div_embedded "python (via uv)"
   if command_exists uv; then
     uv --version
     uv python list --only-installed
