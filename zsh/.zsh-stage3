@@ -170,6 +170,14 @@ kroko_info() {
   fi
 
   # ================================
+  kroko_print_div_embedded "claude"
+  if command_exists claude ; then
+    claude --version 2>/dev/null
+  else
+    echo "NOT FOUND"
+  fi
+
+  # ================================
   # figlet
   # ================================
   kroko_print_div_simple
