@@ -21,7 +21,10 @@ kroko_info() {
     echo "Listing local"
     nvm list
   else
-    echo "NOT FOUND"
+    echo "nvm not found, listing system if any"
+    if command_exists node ; then
+      node --version
+    fi
   fi
 
   # ================================
@@ -30,7 +33,13 @@ kroko_info() {
     uv --version
     uv python list --only-installed
   else
-    echo "NOT FOUND"
+    echo "uv not found, listing system if any"
+    if command_exists python2 ; then
+      python2 --version
+    fi
+    if command_exists python3 ; then
+      python3 --version
+    fi
   fi
 
   # ================================
@@ -55,7 +64,10 @@ kroko_info() {
       echo "govm exists, but no go installed"
     fi
   else
-    echo "NOT FOUND"
+    echo "govm not found, listing system if any"
+    if command_exists go ; then
+      go version
+    fi
   fi
 
   # ================================
@@ -63,7 +75,12 @@ kroko_info() {
   if command_exists phpvm ; then
     phpvm list
   else
-    echo "NOT FOUND"
+    echo "phpvm not found, listing system if any"
+    for php_version in 7.0 7.1 7.2 7.3 7.4 8.0 8.1 8.2 8.3 8.4 8.5 8.6; do
+      if command_exists "php$php_version"; then
+        "php$php_version" --version | head -n 1
+      fi
+    done
   fi
 
   # ================================
