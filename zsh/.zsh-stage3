@@ -150,7 +150,7 @@ kroko_info() {
   # ================================
 
   # ================================
-  kroko_print_div_embedded "lms"
+  kroko_print_div_embedded "lmstudio"
   if command_exists lms ; then
     echo "available models"
     lms ls 2>/dev/null
