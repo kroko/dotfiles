@@ -12,10 +12,16 @@ other options
 
 ...haah.
 
+the basics, here are other dotfiles here too
+
 ```sh
 stow stow # for .stow-global-ignore
-stow zsh
+stow --adopt zsh && git restore . # adopt and then reverse because szh will be on the sys
 stow tmux
 stow vim
+stow python # for system python, we use uv and venv anyways
+stow git-
+stow gpg-
+stow editorconfig
 stow alacritty
 ```
