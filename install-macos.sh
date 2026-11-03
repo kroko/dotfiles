@@ -59,6 +59,23 @@ source $HOME/.zlogin
 omz reload
 
 echo "================"
+echo "node via nvm"
+
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.5/install.sh | bash
+
+source $HOME/.zshenv
+source $HOME/.zprofile
+source $HOME/.zshrc
+source $HOME/.zlogin
+omz reload
+
+echo "================"
+echo "python via uv"
+
+curl -LsSf https://astral.sh/uv/install.sh | env NO_MODIFY_PATH=1 bash -s -- --no-modify-path
+
+
+echo "================"
 echo "rust via rustup"
 
 if ! command -v rustup; then
@@ -73,11 +90,6 @@ else
 fi
 
 echo "================"
-echo "python via uv"
-
-curl -LsSf https://astral.sh/uv/install.sh | env NO_MODIFY_PATH=1 bash -s -- --no-modify-path
-
-echo "================"
 echo "go via govm"
 
 if ! command -v govm; then
@@ -87,18 +99,7 @@ else
 fi
 
 echo "================"
-echo "node via nvm"
-
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.5/install.sh | bash
-
-source $HOME/.zshenv
-source $HOME/.zprofile
-source $HOME/.zshrc
-source $HOME/.zlogin
-omz reload
-
-echo "================"
-echo "php"
+echo "php via phpvm"
 curl -o- https://raw.githubusercontent.com/Thavarshan/phpvm/main/install.sh | bash
 phpvm install latest-remote
 phpvm use
@@ -111,9 +112,17 @@ php composer-setup.php --install-dir=$HOME/.local/bin --filename=composer
 php -r "unlink('composer-setup.php');"
 
 echo "================"
+echo "docker"
+
+echo "================"
 echo "llm"
+
+echo "> ollama"
 curl -fsSL https://ollama.com/install.sh | sh
 curl -fsSL https://raw.githubusercontent.com/qaribhaider/ollama-to-lmstudio-symlinks/main/install.sh | bash
-# ollama pull qwen2.5-coder:14b
+
+echo "> opencode"
 curl -fsSL https://opencode.ai/v2/install | bash
+
+echo "> claude"
 curl -fsSL https://claude.ai/install.sh | bash
