@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# peek at
+# https://github.com/mathiasbynens/dotfiles/blob/main/.macos
+# https://github.com/mislav/dotfiles/blob/master/osx
+
 set -e
 
 # for consistency use NSGlobalDomain (versus -g)
