@@ -189,6 +189,11 @@ if [[ $(grep --quiet --no-messages --ignore-case Microsoft /proc/version) ]]; th
 fi
 
 # ================================
+if [[ $(uname) == "Darwin" ]]; then
+  alias cpwd="pwd | tr -d '\n' | pbcopy && echo 'pwd copied to clipboard'"
+fi
+
+# ================================
 alias calc='bc -l'
 
 # ================================
