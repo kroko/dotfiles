@@ -20,11 +20,6 @@ fi
 #   export PATH=$(brew --prefix rustup)/bin:"$PATH"
 # fi
 
-if command -v rustup > /dev/null ; then
-  mkdir -p $HOME/.zfunc
-  rustup completions zsh > ~/.zfunc/_rustup
-fi
-
 # ================================
 # uv python
 
