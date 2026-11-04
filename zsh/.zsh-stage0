@@ -126,6 +126,10 @@ if [[ $(uname) == "Darwin" ]]; then
   # VS Code
   export PATH="/Applications/Visual Studio Code.app/Contents/Resources/app/bin:$PATH"
 
+  # ----------------
+  # Docker Desktop
+  export PATH="$HOME/.docker/bin:$PATH"
+
   # # ----------------
   # # Qt
   # export PATH="/usr/local/sbin:$PATH"
