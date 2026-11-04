@@ -79,7 +79,7 @@ export PATH=$PATH:$HOME/.govm/go/bin
 
 # ================================
 # phpvm for PHP
-export PHPVM_DIR="/Users/reinis/.phpvm"
+export PHPVM_DIR=$HOME/.phpvm
 export PATH="$PHPVM_DIR/bin:$PATH"
 
 # # ================================
