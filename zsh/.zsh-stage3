@@ -218,6 +218,7 @@ kroko_info() {
 #   kroko_info
 # fi
 
-if [ "${KROKO_ENV_PRINT_INFO:-}" = "1" ]; then
+if [ "${KROKO_ENV_PRINT_INFO:-}" = "1" ] && [ "${KROKO_ENV_INFO_PRINTED:-}" != "1" ]; then
   kroko_info
+  export KROKO_ENV_INFO_PRINTED=1
 fi
