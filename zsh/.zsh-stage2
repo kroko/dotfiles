@@ -70,9 +70,6 @@ ZSH_THEME="gnzh"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-mkdir -p $HOME/.zfunc
-fpath+=($HOME/.zfunc)
-
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
@@ -94,6 +91,7 @@ if [[ $(uname) == "Darwin" ]]; then
     git
     docker
     docker-compose
+    rust
     colored-man-pages
     colorize
     zsh-better-npm-completion
@@ -114,6 +112,7 @@ elif command -v apt > /dev/null; then
     git
     docker
     docker-compose
+    rust
     colored-man-pages
     colorize
     zsh-better-npm-completion
