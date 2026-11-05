@@ -64,6 +64,13 @@ indent_style = space
 indent_size = 4
 
 # --------------------------------
+# Align with https://github.com/realm/SwiftLint/
+
+[*.swift]
+indent_style = space
+indent_size = 4
+
+# --------------------------------
 [*.applescript]
 indent_style = tab
 indent_size = 2
