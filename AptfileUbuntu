@@ -1,0 +1,44 @@
+# Ubuntu packages, installed by bootstrap.sh
+
+# sys dependent are still in bootstrap.sh
+
+# one per line
+
+# quick basics
+build-essential
+git
+libssl-dev
+openssh-server
+screen
+tmux
+curl
+wget
+unzip
+bzip2
+
+# clang for clang tidy
+clang
+clang-format
+clang-tidy
+clang-tools
+clangd
+llvm
+bear
+
+# zsh
+zsh
+
+# stow
+stow
+figlet
+
+# gpg
+gpa
+seahorse
+pinentry-curses
+
+# openvpn
+openvpn
+
+# virt mounts
+bindfs
