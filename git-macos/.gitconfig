@@ -18,3 +18,5 @@
 	gpgSign = true
 [credential]
 	helper = store
+[core]
+	hooksPath = ~/.githooks

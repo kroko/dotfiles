@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+ai='claude|anthropic|openai|codex|copilot|cursor|devin|kiro|cline|kilo|opencode|command ?code|noreply@(anthropic|openai)'
+
+if grep -qiE "^co-authored-by:.*($ai)|generated (with|by) .*($ai|\[)|🤖" "$1"; then
+  echo "commit-msg: AI attribution found in commit message. Remove it (see AGENTS.md)." >&2
+  exit 1
+fi
+
+repo_hook="$(git rev-parse --git-dir)/hooks/commit-msg"
+if [ -x "$repo_hook" ]; then
+  exec "$repo_hook" "$@"
+fi
