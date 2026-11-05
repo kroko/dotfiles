@@ -69,6 +69,60 @@ linux_is_ubuntu() {
   grep -q '^ID=ubuntu' /etc/os-release
 }
 
+# bash ./bootstrap.sh --list-required
+# bash ./bootstrap.sh --list-optional
+list_steps() {
+  sed -n -E "s/^[[:space:]]*$1 ([mlc][a-z_]*).*/\1/p" "${BASH_SOURCE[0]}"
+}
+
+case "${1:-}" in
+  --list-required)
+    list_steps required
+    exit 0
+    ;;
+  --list-optional)
+    list_steps optional
+    exit 0
+    ;;
+esac
+
+# bash ./bootstrap.sh macos_docker common_genai_harness
+if [ "$OS" = "macos" ]; then
+  OPTIONAL_STEPS="macos_php macos_docker macos_genai_llm_servers common_genai_harness"
+else
+  OPTIONAL_STEPS="linux_guest linux_docker common_genai_harness"
+fi
+REQUESTED_STEPS=" $* "
+
+for step in "$@"; do
+  if [[ " $OPTIONAL_STEPS " != *" $step "* ]]; then
+    die "unknown step on $OS: $step, pick from: $OPTIONAL_STEPS"
+  fi
+done
+
+required() {
+  "$1"
+}
+
+optional() {
+  if [[ "$REQUESTED_STEPS" == *" $1 "* ]]; then
+    "$1"
+  fi
+}
+
+resume() {
+  section "done"
+  if [ -n "$(git -C "$DOTFILES_DIR" status --porcelain)" ]; then
+    echo "repo has uncommitted changes, check that no installer wrote through a stowed file:"
+    git -C "$DOTFILES_DIR" status --short
+  fi
+  if [ "$OS" = "macos" ]; then
+    echo "reopen shell to pick up"
+  else
+    echo "log in/out to pick up"
+  fi
+}
+
 # ================================
 # macOS
 # ================================
@@ -459,31 +513,23 @@ common_stow_dotfiles() {
 # ================================
 
 if [ "$OS" = "macos" ]; then
-  macos_configure
-  macos_packages_main
-  macos_php
-  macos_docker
-  macos_genai_llm_servers
+  required macos_configure
+  required macos_packages_main
+  optional macos_php
+  optional macos_docker
+  optional macos_genai_llm_servers
 else
-  linux_limits
-  linux_packages_main
-  linux_packages_cond
-  linux_guest
-  linux_docker
+  required linux_limits
+  required linux_packages_main
+  required linux_packages_cond
+  optional linux_guest
+  optional linux_docker
 fi
 
-common_oh_my_zsh
-common_toolchains
-common_genai_harness
-common_stow_dotfiles
+required common_oh_my_zsh
+required common_toolchains
+optional common_genai_harness
 
-section "done"
-if [ -n "$(git -C "$DOTFILES_DIR" status --porcelain)" ]; then
-  echo "repo has uncommitted changes, check that no installer wrote through a stowed file:"
-  git -C "$DOTFILES_DIR" status --short
-fi
-if [ "$OS" = "macos" ]; then
-  echo "open a new shell to pick all this up"
-else
-  echo "log out and back in to pick all this up"
-fi
+required common_stow_dotfiles
+
+resume
