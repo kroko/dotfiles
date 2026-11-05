@@ -5,3 +5,7 @@ brew "gnupg"
 brew "pinentry-mac"
 brew "tmux"
 brew "figlet"
+
+# dev
+brew "shellcheck"
+brew "swiftlint"
