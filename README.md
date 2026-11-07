@@ -1,11 +1,13 @@
 # kroko dotfiles
 
+this is for personal workstation, not server infra IaC
+
 targets macOS and GNU/Linux with apt (usually Ubuntu)
 
 make this thing with minimum dependencies
 
 - basic tooling install via simple shell script - thing that reasonable OS has OOB
-- dotfile placement using GNU stow (`--no-folding`) - needs quick install via OS  package manager
+- dotfile placement using GNU stow (most using `--no-folding`) - needs quick install via OS  package manager
 
 other options were considered
 
