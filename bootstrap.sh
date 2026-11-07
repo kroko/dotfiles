@@ -506,7 +506,9 @@ common_stow_dotfiles() {
     common_stow_package_adopt rust-macos "$RUST_CHANGES"
   fi
 
-  local packages=(
+  local package
+
+  local packages_no_folding=(
     alacritty
     tmux
     vim
@@ -517,9 +519,15 @@ common_stow_dotfiles() {
     python
     opencode
   )
-  local package
-  for package in "${packages[@]}"; do
+  for package in "${packages_no_folding[@]}"; do
     common_stow_package_no_folding "$package"
+  done
+
+  local packages_folding=(
+    agents
+  )
+  for package in "${packages_folding[@]}"; do
+    common_stow_package_folding "$package"
   done
 }
 

@@ -1420,3 +1420,6 @@ gpg-linux/.gnupg/
 tinker/
 
 !.config/
+
+# ignore agent runtime loaded skills
+agents/.agents/skills/synced
