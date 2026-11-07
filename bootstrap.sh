@@ -511,6 +511,7 @@ common_stow_dotfiles() {
     tmux
     vim
     editorconfig
+    markdownlint
     "git-$OS"
     "gpg-${OS/wsl/linux}" # there is no gpg-wsl
     python
