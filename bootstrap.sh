@@ -462,9 +462,14 @@ common_genai_harness() {
   fi
 }
 
-common_stow_package() {
-  # no folding
+# links each file on its own, so files tools write next to stowed ones stay out of the repo
+common_stow_package_no_folding() {
   stow --dir="$DOTFILES_DIR" --target="$HOME" --no-folding "$@"
+}
+
+# links a whole directory when the target has none yet, so anything tools write in it lands in the repo
+common_stow_package_folding() {
+  stow --dir="$DOTFILES_DIR" --target="$HOME" "$@"
 }
 
 # adopt and then reverse, so the repo version wins over files the OS or an installer wrote
@@ -473,11 +478,11 @@ common_stow_package_adopt() {
   local package="$1" changes="$2"
   if [ -n "$changes" ]; then
     echo "$package has uncommitted changes, not adopting"
-    common_stow_package "$package"
+    common_stow_package_no_folding "$package"
     return
   fi
 
-  common_stow_package --adopt "$package"
+  common_stow_package_no_folding --adopt "$package"
   git -C "$DOTFILES_DIR" restore -- "$package"
 }
 
@@ -494,17 +499,26 @@ common_stow_dotfiles() {
   #   chmod 644 $HOME/.ssh/*.pub
   # fi
 
-  common_stow_package stow
+  common_stow_package_no_folding stow
   common_stow_package_adopt zsh "$ZSH_CHANGES"
 
   if [ "$OS" = "macos" ]; then
     common_stow_package_adopt rust-macos "$RUST_CHANGES"
   fi
 
-  # there is no gpg-wsl
+  local packages=(
+    alacritty
+    tmux
+    vim
+    editorconfig
+    "git-$OS"
+    "gpg-${OS/wsl/linux}" # there is no gpg-wsl
+    python
+    opencode
+  )
   local package
-  for package in tmux vim python "git-$OS" "gpg-${OS/wsl/linux}" editorconfig alacritty opencode; do
-    common_stow_package "$package"
+  for package in "${packages[@]}"; do
+    common_stow_package_no_folding "$package"
   done
 }
 
