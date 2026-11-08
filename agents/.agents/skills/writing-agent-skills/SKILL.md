@@ -59,20 +59,13 @@ description: Extracts text and tables from PDFs, fills forms and merges files. U
 
 ## Where skills live
 
-- **Main location:** `~/.agents/skills/<skill-name>/`. OpenCode, Command Code, Kilo Code, Pi, OpenAI Codex, GitHub Copilot (the CLI, and local sessions in VS Code), Cursor and the Devin CLI read it directly.
-- **Links:** Claude Code, Cline and Amazon Kiro each read only their own folder, so link every skill into it:
-
-  ```sh
-  ln -s ~/.agents/skills/<skill-name> ~/.claude/skills/<skill-name>
-  ln -s ~/.agents/skills/<skill-name> ~/.cline/skills/<skill-name>
-  ln -s ~/.agents/skills/<skill-name> ~/.kiro/skills/<skill-name>
-  ```
-
-  Link single skills rather than whole folders, because `~/.claude/skills/synced/` belongs to Claude.
-- **Optional links:** `~/.copilot/skills/<skill-name>` for Copilot's own harness in VS Code, and `~/.cursor/skills/<skill-name>` for skills that Cursor should sync to its Cloud Agents.
+- **Default placement:** write every new skill to `~/.agents/skills/<skill-name>/`, the main location that OpenCode, Command Code, Kilo Code, Pi, OpenAI Codex, GitHub Copilot (the CLI, and local sessions in VS Code), Cursor and the Devin CLI read directly. Do not put a skill in the personal folder of the agent you happen to be running in just because you are that agent.
+- **Scope first:** write a skill to an agent-specific personal folder (`~/.claude/skills/` for Claude Code, `~/.cline/skills/` for Cline, `~/.kiro/skills/` for Kiro) or a project folder (a repository's `.agents/skills/`) only when a human explicitly asks for that scope. If the scope is unclear, ask the human before writing: global, one specific agent, or a project.
+- **Never link on your own:** never create symlinks, links or copies from `~/.agents/skills/` into an agent's personal folder unless a human explicitly asks for exactly that. If a human does ask, link single skills rather than whole folders, because `~/.claude/skills/synced/` belongs to Claude.
+- **Optional agent folders:** `~/.copilot/skills/` for Copilot's own harness in VS Code and `~/.cursor/skills/` for skills that Cursor should sync to its Cloud Agents — again only when a human explicitly asks.
 - **Devin's cloud agent** doesn't read home folders. Commit the skill to a repository's `.agents/skills/`, or add it on Devin's Customize page.
 - **Kiro's custom agents** load skills only when their `resources` list them as `skill://` URIs.
-- **Duplicates:** OpenCode, Cursor, VS Code and Kilo Code (with its Claude Code compatibility on) also read `~/.claude/skills/`, so they may list a linked skill twice. Only Claude Code and OpenAI Codex document following symlinks, so check each tool's skill list after linking.
+- **Duplicates:** OpenCode, Cursor, VS Code and Kilo Code (with its Claude Code compatibility on) also read `~/.claude/skills/`, so a skill placed or linked there may appear twice. Only Claude Code and OpenAI Codex document following symlinks, so check a tool's skill list after any human-requested linking.
 - **Until then:** skills in `~/.claude/skills/<skill-name>/` load in Claude Code, OpenCode, Cursor, local sessions in VS Code, and Kilo Code with its Claude Code compatibility on. They don't load in Command Code, Cline, Pi, OpenAI Codex, the Copilot CLI, Devin or Kiro.
 
 ## Before finishing

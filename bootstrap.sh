@@ -134,6 +134,9 @@ resume() {
 macos_configure() {
   section "macos settings"
 
+  # Disable the boot sound
+  sudo nvram SystemAudioVolume=" "
+
   # Show hidden files and folders on macOS,
   defaults write com.apple.finder AppleShowAllFiles TRUE
 
@@ -525,6 +528,8 @@ common_stow_dotfiles() {
 
   local packages_folding=(
     agents
+    agent-claude
+    agent-cline
   )
   for package in "${packages_folding[@]}"; do
     common_stow_package_folding "$package"
