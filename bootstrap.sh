@@ -88,7 +88,7 @@ esac
 
 # bash ./bootstrap.sh macos_docker common_genai_harness
 if [ "$OS" = "macos" ]; then
-  OPTIONAL_STEPS="macos_php macos_docker macos_genai_llm_servers common_genai_harness"
+  OPTIONAL_STEPS="macos_php macos_docker macos_genai_inference_servers common_genai_harness"
 else
   OPTIONAL_STEPS="linux_guest linux_docker common_genai_harness"
 fi
@@ -205,14 +205,35 @@ macos_docker() (
   sudo /Volumes/Docker/Docker.app/Contents/MacOS/install
 )
 
-macos_genai_llm_servers() {
+macos_genai_inference_servers() {
   section "genai llm servers"
-  if ! has ollama; then
-    curl -fsSL https://ollama.com/install.sh | sh
-  fi
-  if ! has ollama-symlinks; then
-    curl -fsSL https://raw.githubusercontent.com/qaribhaider/ollama-to-lmstudio-symlinks/main/install.sh | bash
-  fi
+
+  # ----
+  # strata via usual installer
+
+  # ----
+  # lms CLI, LM Studio, Bionic via usual installer
+  # stra via usual installer, not CLI
+  # if ! has brew; then
+  #   echo "brew is required to install lm-studio" >&2
+  # else
+  #   brew install --cask lm-studio
+  # fi
+
+  # ----
+  # llmster skipped
+  # if ! has llmster; then
+  #   curl -fsSL https://lmstudio.ai/install.sh | bash
+  # fi
+
+  # ----
+  # ollama dropped
+  # if ! has ollama; then
+  #   curl -fsSL https://ollama.com/install.sh | bash
+  # fi
+  # if ! has ollama-symlinks; then
+  #   curl -fsSL https://raw.githubusercontent.com/qaribhaider/ollama-to-lmstudio-symlinks/main/install.sh | bash
+  # fi
 }
 
 macos_php() {
@@ -545,7 +566,7 @@ if [ "$OS" = "macos" ]; then
   required macos_packages_main
   optional macos_php
   optional macos_docker
-  optional macos_genai_llm_servers
+  optional macos_genai_inference_servers
 else
   required linux_limits
   required linux_packages_main
