@@ -452,6 +452,13 @@ common_oh_my_zsh() {
   done
 }
 
+common_tmux_tpm() {
+  section "tmux plugin manager"
+  if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
+    git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
+  fi
+}
+
 # .zsh-* already holds rc these spit out, so try to keep them not touching zsh
 # common_stow_package_adopt restores anyways
 common_toolchains() {
@@ -582,6 +589,7 @@ else
 fi
 
 required common_oh_my_zsh
+required common_tmux_tpm
 required common_toolchains
 optional common_genai_harness
 
