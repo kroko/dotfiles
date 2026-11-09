@@ -227,6 +227,12 @@ macos_genai_inference_servers() {
   # fi
 
   # ----
+  # unsloth via usual installer
+  # if ! has unsloth; then
+  #   curl -fsSL https://unsloth.ai/install.sh | bash
+  # fi
+
+  # ----
   # ollama dropped
   # if ! has ollama; then
   #   curl -fsSL https://ollama.com/install.sh | bash
