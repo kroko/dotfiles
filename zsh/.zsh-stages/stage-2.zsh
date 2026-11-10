@@ -1,13 +1,13 @@
 # .zshrc
 
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+# export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
+# load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # ZSH_THEME="robbyrussell"
@@ -31,8 +31,11 @@ ZSH_THEME="gnzh"
 # zstyle ':omz:update' mode auto      # update automatically without asking
 # zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 
-# Uncomment the following line to change how often to auto-update (in days).
+# Uncomment the following line to change the frequency the auto-updater is run (in days).
 # zstyle ':omz:update' frequency 13
+
+# Uncomment the following line to set how old an update must be before it's applied, manually or via the auto-updater (in days).
+# zstyle ':omz:update' cooldown 10
 
 # Uncomment the following line if pasting URLs and other text is messed up.
 # DISABLE_MAGIC_FUNCTIONS="true"
@@ -80,51 +83,28 @@ ZSH_THEME="gnzh"
   # jsontools
 
 # ================================
-# macOS
+# plugins
 # ================================
+# common to all OS
+plugins=(
+  git
+  docker
+  docker-compose
+  rust
+  colored-man-pages
+  colorize
+  zsh-better-npm-completion
+  zsh-completions
+  zsh-autosuggestions
+  virtualenv
+  zsh-uv-env
+  zsh-syntax-highlighting
+  history-substring-search
+)
+# macOS extras go first
 if [[ $KROKO_OS == darwin ]]; then
-  plugins=(
-    macos
-    brew
-    git
-    docker
-    docker-compose
-    rust
-    colored-man-pages
-    colorize
-    zsh-better-npm-completion
-    zsh-completions
-    zsh-autosuggestions
-    virtualenv
-    zsh-uv-env
-    zsh-syntax-highlighting
-    history-substring-search
-  )
-
-# ================================
-# Debian Ubuntu
-# ================================
-elif [[ $KROKO_OS == linux ]]; then
-  plugins=(
-    git
-    docker
-    docker-compose
-    rust
-    colored-man-pages
-    colorize
-    zsh-better-npm-completion
-    zsh-completions
-    zsh-autosuggestions
-    virtualenv
-    zsh-uv-env
-    zsh-syntax-highlighting
-    history-substring-search
-  )
-
-# ================================
-# Unknown
-# ================================
-else
+  plugins=(macos brew "${plugins[@]}")
+elif [[ $KROKO_OS != linux ]]; then
   echo 'Unknown OS!'
 fi
 
@@ -144,33 +124,10 @@ zstyle ':completion:*:*:docker-*:*' option-stacking yes
 
 source "$ZSH/oh-my-zsh.sh"
 
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
 # ================================
+# aliases
+# ================================
+
 if [[ $KROKO_OS == darwin ]]; then
   alias l='ls -lahp -D "%Y-%d-%m %H:%M:%S" --color=auto'
 else
@@ -190,6 +147,11 @@ fi
 
 # ================================
 alias calc='bc -l'
+
+
+# ================================
+# functions
+# ================================
 
 # ================================
 cdl() {
@@ -364,6 +326,7 @@ tmux () {
 
 # ================================
 # interactive-only tool init (slow)
+# ================================
 
 # ================================
 # NVM
