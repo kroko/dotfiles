@@ -70,6 +70,11 @@ export PATH="$HOME/.composer/vendor/bin:$PATH"
 # ================================
 . "$HOME/.cargo/env" 2>/dev/null
 
+# if rustup is installed via brew instead of the official script,
+# if [[ $KROKO_OS == darwin ]] ; then
+#   export PATH=$(brew --prefix rustup)/bin:"$PATH"
+# fi
+
 # ================================
 # uv python
 

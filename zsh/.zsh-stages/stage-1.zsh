@@ -7,35 +7,6 @@ if command -v gpgconf > /dev/null ; then
 fi
 
 # ================================
-# NVM
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# ================================
-# rustup
-# ================================
-
-# # this is only if rustup is installed via brew, which we are not doing, using official script
-# if [[ $KROKO_OS == darwin ]] ; then
-#   export PATH=$(brew --prefix rustup)/bin:"$PATH"
-# fi
-
-# ================================
-# uv python
-
-if command -v uv > /dev/null ; then
-  # https://docs.astral.sh/uv/getting-started/installation/
-  eval "$(uv generate-shell-completion zsh)"
-  eval "$(uvx --generate-shell-completion zsh)"
-fi
-
-# ================================
-# phpvm for PHP
-if [[ -s "$PHPVM_DIR/phpvm.sh" ]]; then
-  source "$PHPVM_DIR/phpvm.sh"
-fi
-
-# ================================
 # ollama
 if [[ $KROKO_OS == darwin ]]; then
   # 16384, 24576, 32768
