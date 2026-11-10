@@ -124,6 +124,14 @@ zstyle ':completion:*:*:docker-*:*' option-stacking yes
 
 source "$ZSH/oh-my-zsh.sh"
 
+
+# ================================
+# keys
+# ================================
+
+# back to bash behaviour for this, need too often
+bindkey '^U' backward-kill-line
+
 # ================================
 # aliases
 # ================================
