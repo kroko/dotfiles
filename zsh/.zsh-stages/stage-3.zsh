@@ -121,7 +121,7 @@ kroko_info() {
   # ================================
   # macOS
   # ================================
-  if [[ $(uname) == "Darwin" ]]; then
+  if [[ $KROKO_OS == darwin ]]; then
 
     # ================================
     kroko_print_div_embedded "Docker"
@@ -135,7 +135,7 @@ kroko_info() {
   # ================================
   # Debian Ubuntu
   # ================================
-  elif command -v apt > /dev/null; then
+  elif [[ $KROKO_OS == linux ]]; then
 
     # ================================
     kroko_print_div_embedded "Docker"
@@ -213,9 +213,9 @@ kroko_info() {
   # figlet
   # ================================
   kroko_print_div_simple
-  if [[ $(uname) == "Darwin" ]]; then
+  if [[ $KROKO_OS == darwin ]]; then
     figlet kroko @ macos 2>/dev/null
-  elif command -v apt > /dev/null; then
+  elif [[ $KROKO_OS == linux ]]; then
     figlet kroko @ debian 2>/dev/null
   else
     figlet kroko @ unknown 2>/dev/null

@@ -1,6 +1,19 @@
 # .zshenv
 
 # ================================
+# OS, computed once per shell and reused in stages
+# - darwin
+# - linux (apt-based)
+# - other
+if [[ $(uname) == "Darwin" ]]; then
+  KROKO_OS=darwin
+elif command -v apt > /dev/null; then
+  KROKO_OS=linux
+else
+  KROKO_OS=other
+fi
+
+# ================================
 # COMMON
 # ================================
 
@@ -14,14 +27,14 @@
 
 # /etc/ssh/ssh_config.d/100-macos.conf has SendEnv LANG LC_*
 # thus user level unsets (e.g. ~/.ssh/config.d/100-locale.conf) will not work
-if [[ $(uname) == "Darwin" ]]; then
+if [[ $KROKO_OS == darwin ]]; then
   export LC_CTYPE=en_US.UTF-8
 fi
 # ================================
 # homebrew bins
 # ================================
 
-if [[ $(uname) == "Darwin" ]]; then
+if [[ $KROKO_OS == darwin ]]; then
   # ----------------
   # Some extra stuff
   export PATH="/usr/local/sbin:$PATH"
@@ -91,7 +104,7 @@ export PATH="$PHPVM_DIR/bin:$PATH"
 
 # ================================
 # lms LM Studio
-if [[ $(uname) == "Darwin" ]]; then
+if [[ $KROKO_OS == darwin ]]; then
   export PATH=$HOME/.lmstudio/bin:$PATH
 fi
 
@@ -111,7 +124,7 @@ export PATH=$HOME/.opencode/bin:$PATH
 # ================================
 # macOS
 # ================================
-if [[ $(uname) == "Darwin" ]]; then
+if [[ $KROKO_OS == darwin ]]; then
 
 
   # ----------------
@@ -139,7 +152,7 @@ if [[ $(uname) == "Darwin" ]]; then
 # ================================
 # Debian Ubuntu
 # ================================
-elif command -v apt > /dev/null; then
+elif [[ $KROKO_OS == linux ]]; then
 
   # ----------------
 

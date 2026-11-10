@@ -16,7 +16,7 @@ fi
 # ================================
 
 # # this is only if rustup is installed via brew, which we are not doing, using official script
-# if [[ $(uname) == "Darwin" ]] ; then
+# if [[ $KROKO_OS == darwin ]] ; then
 #   export PATH=$(brew --prefix rustup)/bin:"$PATH"
 # fi
 
@@ -37,7 +37,7 @@ fi
 
 # ================================
 # ollama
-if [[ $(uname) == "Darwin" ]]; then
+if [[ $KROKO_OS == darwin ]]; then
   # 16384, 24576, 32768
   launchctl setenv OLLAMA_CONTEXT_LENGTH 24576
   launchctl setenv OLLAMA_KEEP_ALIVE 5m

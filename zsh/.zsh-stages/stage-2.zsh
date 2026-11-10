@@ -82,7 +82,7 @@ ZSH_THEME="gnzh"
 # ================================
 # macOS
 # ================================
-if [[ $(uname) == "Darwin" ]]; then
+if [[ $KROKO_OS == darwin ]]; then
   plugins=(
     macos
     brew
@@ -104,7 +104,7 @@ if [[ $(uname) == "Darwin" ]]; then
 # ================================
 # Debian Ubuntu
 # ================================
-elif command -v apt > /dev/null; then
+elif [[ $KROKO_OS == linux ]]; then
   plugins=(
     git
     docker
@@ -171,7 +171,7 @@ source "$ZSH/oh-my-zsh.sh"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # ================================
-if [[ $(uname) == "Darwin" ]]; then
+if [[ $KROKO_OS == darwin ]]; then
   alias l='ls -lahp -D "%Y-%d-%m %H:%M:%S" --color=auto'
 else
   alias l='ls -lahpgo --time-style="+" --color=auto'
@@ -184,7 +184,7 @@ if [[ $(grep --quiet --no-messages --ignore-case Microsoft /proc/version) ]]; th
 fi
 
 # ================================
-if [[ $(uname) == "Darwin" ]]; then
+if [[ $KROKO_OS == darwin ]]; then
   alias cpwd="pwd | tr -d '\n' | pbcopy && echo 'pwd copied to clipboard'"
 fi
 
