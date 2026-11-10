@@ -95,12 +95,11 @@ if [[ $(uname) == "Darwin" ]]; then
     zsh-better-npm-completion
     zsh-completions
     zsh-autosuggestions
-    history-substring-search
-    zsh-syntax-highlighting
     virtualenv
     zsh-uv-env
+    zsh-syntax-highlighting
+    history-substring-search
   )
-  autoload -U compinit && compinit
 
 # ================================
 # Debian Ubuntu
@@ -116,12 +115,11 @@ elif command -v apt > /dev/null; then
     zsh-better-npm-completion
     zsh-completions
     zsh-autosuggestions
-    history-substring-search
-    zsh-syntax-highlighting
     virtualenv
     zsh-uv-env
+    zsh-syntax-highlighting
+    history-substring-search
   )
-  autoload -U compinit && compinit
 
 # ================================
 # Unknown
@@ -144,7 +142,7 @@ zstyle ':completion:*:*:docker-*:*' option-stacking yes
 
 # ================================
 
-source $ZSH/oh-my-zsh.sh
+source "$ZSH/oh-my-zsh.sh"
 
 # User configuration
 
