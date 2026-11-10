@@ -214,21 +214,6 @@ r() {
 }
 
 # ================================
-command_exists () {
-  type "$1" &> /dev/null ;
-}
-
-# ================================
-kroko_print_div_simple() {
-  printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
-}
-
-# ================================
-kroko_print_div_embedded() {
-   printf "\e[45m$1%*s\e[49m\n" "${COLUMNS:-$(tput cols)}-${#1}" ''
-}
-
-# ================================
 # adopted, added arrow navigation n stuff
 # https://unix.stackexchange.com/a/771364/221829
 

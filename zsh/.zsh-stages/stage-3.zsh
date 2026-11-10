@@ -1,5 +1,21 @@
 # .zlogin
 
+# ================================
+command_exists () {
+  type "$1" &> /dev/null ;
+}
+
+# ================================
+kroko_print_div_simple() {
+  printf '\e[45m%*s\e[49m\n' "${COLUMNS:-$(tput cols)}" ''
+}
+
+# ================================
+kroko_print_div_embedded() {
+   printf "\e[45m$1%*s\e[49m\n" "${COLUMNS:-$(tput cols)}-${#1}" ''
+}
+
+# ================================
 kroko_info() {
   # ================================
   # COMMON
