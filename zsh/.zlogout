@@ -10,7 +10,7 @@
 KROKO_ZSH_STAGE=4
 
 typeset -ga KROKO_ZSH_SOURCING
-source "$HOME/.zsh-stage$KROKO_ZSH_STAGE"
+source "$HOME/.zsh-stages/stage-$KROKO_ZSH_STAGE.zsh"
 KROKO_ZSH_SOURCING[$((KROKO_ZSH_STAGE + 1))]=true
 
 return
