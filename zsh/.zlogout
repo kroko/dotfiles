@@ -1,13 +1,16 @@
-# → .zshenv, always                 macos YES, Ubuntu desktop YES
-# → .zprofile, if login shell       macos YES, Ubuntu desktop NOT
-# → .zshrc, if interactive shell    macos YES, Ubuntu desktop YES
-# → .zlogin, if login shell         macos YES, Ubuntu desktop NOT
-# → .zlogout, if login shell        macos YES
+# Login + Interactive:
+# .zshenv → .zprofile → .zshrc → .zlogin → EXIT → .zlogout
+# Login + Non-interactive:
+# .zshenv → .zprofile → .zlogin → EXIT → .zlogout
+# Non-login + Interactive:
+# .zshenv → .zshrc → EXIT
+# Non-login + Non-interactive:
+# .zshenv → EXIT
 
-if [[ $(uname) == "Darwin" ]]; then
-  source $HOME/.zsh-stage4
-else
-  echo 'this implementation sources .zlogout, but no scripts set!'
-fi
+KROKO_ZSH_STAGE=4
+
+typeset -ga KROKO_ZSH_SOURCING
+source "$HOME/.zsh-stage$KROKO_ZSH_STAGE"
+KROKO_ZSH_SOURCING[$((KROKO_ZSH_STAGE + 1))]=true
 
 return
