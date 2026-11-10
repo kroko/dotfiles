@@ -42,7 +42,7 @@ export PATH="$HOME/.local/bin:$PATH"
 
 # ================================
 # gpg
-export GPG_TTY=`tty`
+[[ -t 0 ]] && export GPG_TTY="$(tty)"
 
 # ================================
 # NVM
