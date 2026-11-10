@@ -2,12 +2,12 @@
 
 # ================================
 # OS, computed once per shell and reused in stages
-# - darwin
-# - linux (apt-based)
+# - macOS
+# - any GNU/Linux
 # - other
 if [[ $(uname) == "Darwin" ]]; then
   KROKO_OS=darwin
-elif command -v apt > /dev/null; then
+elif [[ $(uname) == "Linux" ]]; then
   KROKO_OS=linux
 else
   KROKO_OS=other
@@ -156,11 +156,11 @@ if [[ $KROKO_OS == darwin ]]; then
 
 # ================================
 # Debian Ubuntu
+# runs only where the Debian multilib dir exists, e.g. not Fedora
 # ================================
-elif [[ $KROKO_OS == linux ]]; then
+elif [[ -d /usr/lib/x86_64-linux-gnu ]]; then
 
   # ----------------
-
   export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
 
 fi
