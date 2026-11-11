@@ -1,6 +1,10 @@
 {
   // my defaults
   "default": true,
+  // https://github.com/DavidAnson/markdownlint/blob/main/doc/md010.md
+  "MD010": {
+    "code_blocks": false
+  },
   // https://github.com/DavidAnson/markdownlint/blob/main/doc/md049.md
   "MD049": {
     "style": "underscore"
