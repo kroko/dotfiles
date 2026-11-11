@@ -43,6 +43,14 @@ kroko_info() {
   fi
 
   # ================================
+  kroko_print_div_embedded "pnpm"
+  if command_exists pnpm ; then
+    pnpm --version
+  else
+    echo "NOT FOUND"
+  fi
+
+  # ================================
   kroko_print_div_embedded "python (via uv)"
   if command_exists uv; then
     uv --version

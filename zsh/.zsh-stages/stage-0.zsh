@@ -62,6 +62,16 @@ export PATH="$HOME/.local/bin:$PATH"
 export NVM_DIR="$HOME/.nvm"
 
 # ================================
+# pnpm
+if [[ $KROKO_OS == darwin ]]; then
+  export PNPM_HOME="$HOME/Library/pnpm"
+fi
+case ":$PATH:" in
+  ":$PNPM_HOME/bin:"*) ;;
+  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
+esac
+
+# ================================
 # Composer
 export PATH="$HOME/.composer/vendor/bin:$PATH"
 

@@ -467,6 +467,11 @@ common_toolchains() {
     curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.5/install.sh | PROFILE=/dev/null bash
   fi
 
+  section "pnpm"
+  if ! has pnpm; then
+    curl -fsSL https://get.pnpm.io | bash -
+  fi
+
   section "python via uv"
   if ! has uv; then
     curl -LsSf https://astral.sh/uv/install.sh | bash -s -- --no-modify-path
