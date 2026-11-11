@@ -65,6 +65,8 @@ export NVM_DIR="$HOME/.nvm"
 # pnpm
 if [[ $KROKO_OS == darwin ]]; then
   export PNPM_HOME="$HOME/Library/pnpm"
+elif [[ $KROKO_OS == linux ]]; then
+  export PNPM_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/pnpm"
 fi
 case ":$PATH:" in
   ":$PNPM_HOME/bin:"*) ;;
