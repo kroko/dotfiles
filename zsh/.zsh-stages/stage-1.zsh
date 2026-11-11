@@ -7,6 +7,13 @@ if command -v gpgconf > /dev/null ; then
 fi
 
 # ================================
+# ssh-agent
+# ================================
+if [[ $KROKO_OS == linux ]]; then
+  eval "$(ssh-agent -s)" > /dev/null
+fi
+
+# ================================
 # ollama
 if [[ $KROKO_OS == darwin ]]; then
   # 16384, 24576, 32768
