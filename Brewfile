@@ -13,3 +13,10 @@ brew "shellcheck"
 # lint
 brew "markdownlint-cli2"
 brew "swiftlint"
+
+# git
+brew "git-lfs"
+
+# github
+brew "gh"
+
