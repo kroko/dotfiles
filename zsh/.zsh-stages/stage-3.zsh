@@ -134,6 +134,8 @@ kroko_info() {
     # ================================
     kroko_print_div_embedded "Docker"
     if command_exists docker ; then
+      docker --version
+      docker compose version
       echo "Listing containers"
       docker container ls
     else
