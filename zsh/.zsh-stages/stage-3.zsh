@@ -151,6 +151,8 @@ kroko_info() {
     kroko_print_div_embedded "Docker"
     if command_exists docker ; then
     if [ $EUID -eq 0 ] || (groups | grep docker &> /dev/null); then
+      docker --version
+      docker compose version
       echo "Listing containers"
       docker container ls
     else
