@@ -179,6 +179,7 @@ kroko_info() {
   # ================================
   kroko_print_div_embedded "lmstudio"
   if command_exists lms ; then
+    lms --version 2>/dev/null
     echo "available models"
     lms ls 2>/dev/null
   else
@@ -188,6 +189,7 @@ kroko_info() {
   # ================================
   kroko_print_div_embedded "ollama"
   if command_exists ollama ; then
+    ollama --version 2>/dev/null
     echo "available models"
     ollama list 2>/dev/null
     echo "running models"
@@ -207,6 +209,7 @@ kroko_info() {
   # ================================
   kroko_print_div_embedded "opencode"
   if command_exists opencode ; then
+    opencode --version 2>/dev/null
     echo "available models"
     opencode models 2>/dev/null
   else
@@ -217,6 +220,14 @@ kroko_info() {
   kroko_print_div_embedded "claude"
   if command_exists claude ; then
     claude --version 2>/dev/null
+  else
+    echo "NOT FOUND"
+  fi
+
+  # ================================
+  kroko_print_div_embedded "codex"
+  if command_exists codex ; then
+    codex --version 2>/dev/null
   else
     echo "NOT FOUND"
   fi
