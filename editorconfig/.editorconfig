@@ -12,10 +12,26 @@ insert_final_newline = true
 
 # --------------------------------
 # Align with Linux kernel style
-[*.{c,h,cpp,hpp}]
+[*.{c,h}]
 indent_style = tab
 indent_size = 8
 
+# --------------------------------
+# Align with Google C++ Style Guide, LLVM Coding Standards
+[*.{cpp,hpp,cxx,hxx}]
+indent_style = space
+indent_size = 2
+
+# --------------------------------
+# Objective-C in line with Google style
+# in Obj-C project add c,h to this group
+# [*.{c,h,m,mm}]
+[*.{m,mm}]
+indent_style = space
+indent_size = 2
+
+# --------------------------------
+# Align with Linux kernel style
 [*.ld]
 indent_style = tab
 indent_size = 8
@@ -25,14 +41,6 @@ indent_style = tab
 indent_size = 8
 
 [meson*]
-indent_style = space
-indent_size = 2
-
-# --------------------------------
-# Objective-C in line with Google style
-# in a Obj-C project remember to also add h
-# [*.{h,m,mm}]
-[*.{m,mm}]
 indent_style = space
 indent_size = 2
 
