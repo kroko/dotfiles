@@ -1,35 +1,34 @@
 {
   "$schema": "https://opencode.ai/config.json",
+
+  // default model on load
   // ----
   //  bionic
   "model": "lmstudio/qwen/qwen3.8-27b",
-
   // ----
-  // ollama (use rarelly because of all the issues with it)
-  //
+  // ollama (use rarely because of all the issues with it)
   // "model": "ollama/qwen3.8:27b-mlx",
-  // "ollama": {
-  //   "num_ctx": 24576
-  // },
-  //
+
   // providers
-  "provider": {
+  "providers": {
+    // lmstudio is built-in opencode V2 provider with local discovery
     "lmstudio": {
-      "npm": "@ai-sdk/openai-compatible",
       "name": "LM Studio (Local)",
-      "options": {
+      "settings": {
         "baseURL": "http://localhost:1234/v1"
       }
     },
+    // ollama is built-in opencode V2 provider with local discovery
     "ollama": {
-      "npm": "@ai-sdk/openai-compatible",
       "name": "Ollama (Local)",
-      "options": {
-        "baseURL": "http://localhost:11434/v1"
+      "settings": {
+        "baseURL": "http://localhost:11434/v1",
+        "num_ctx": 24576
       }
     }
-  },
-  "plugins": [
-    "@khalilgharbaoui/opencode-claude-code-plugin"
-  ]
+  }
+  // claude via plugin not direct provider
+  // "plugins": [
+  //   "@khalilgharbaoui/opencode-claude-code-plugin"
+  // ]
 }
