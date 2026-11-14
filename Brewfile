@@ -8,6 +8,8 @@ brew "pinentry-mac"
 brew "figlet"
 
 # dev
+brew "automake"
+brew "bear"
 brew "shellcheck"
 
 # lint
