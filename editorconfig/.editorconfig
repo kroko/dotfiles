@@ -29,6 +29,14 @@ indent_style = space
 indent_size = 2
 
 # --------------------------------
+# Objective-C in line with Google style
+# in a Obj-C project remember to also add h
+# [*.{h,m,mm}]
+[*.{m,mm}]
+indent_style = space
+indent_size = 2
+
+# --------------------------------
 # Align with JavaScript Semistandard Style
 
 [*.{js,mjs,cjs,ts,jsx,tsx}]
