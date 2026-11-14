@@ -136,6 +136,7 @@ export OLLAMA_MAX_QUEUE=512
 
 # ================================
 # opencode
+export OPENCODE_DISABLE_FREE_MODELS=0
 export PATH=$HOME/.opencode/bin:$PATH
 
 # ================================
