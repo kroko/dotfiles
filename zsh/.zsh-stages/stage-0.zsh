@@ -1,6 +1,11 @@
 # .zshenv
 
 # ================================
+# keep PATH deduplicated
+
+typeset -U PATH path
+
+# ================================
 # OS, computed once per shell and reused in stages
 # - macOS
 # - any GNU/Linux
@@ -36,15 +41,12 @@ fi
 # ================================
 
 if [[ $KROKO_OS == darwin ]]; then
-  # bails out silently when developer tools are missing or xcrun cannot resolve clang
+  # bails out silently when developer tools are missing or xcrun cannot resolve clang;
   if xcode-select -p >/dev/null 2>&1 \
      && xcode_toolchain_bin="$(xcrun -f clang 2>/dev/null)"; then
-    case ":$PATH:" in
-      ":${xcode_toolchain_bin:h}:"*) ;;
-      # append, so that we get clang-format,
-      # but for other tools we get /usr/bin shims
-      *) export PATH="$PATH:${xcode_toolchain_bin:h}" ;;
-    esac
+    # append, so that we get clang-format,
+    # but for other tools we get /usr/bin shims
+    export PATH="$PATH:${xcode_toolchain_bin:h}"
   fi
 fi
 
