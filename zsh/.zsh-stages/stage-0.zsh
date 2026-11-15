@@ -30,6 +30,24 @@ fi
 if [[ $KROKO_OS == darwin ]]; then
   export LC_CTYPE=en_US.UTF-8
 fi
+
+# ================================
+# Xcode toolchain bin path
+# ================================
+
+if [[ $KROKO_OS == darwin ]]; then
+  # bails out silently when developer tools are missing or xcrun cannot resolve clang
+  if xcode-select -p >/dev/null 2>&1 \
+     && xcode_toolchain_bin="$(xcrun -f clang 2>/dev/null)"; then
+    case ":$PATH:" in
+      ":${xcode_toolchain_bin:h}:"*) ;;
+      # append, so that we get clang-format,
+      # but for other tools we get /usr/bin shims
+      *) export PATH="$PATH:${xcode_toolchain_bin:h}" ;;
+    esac
+  fi
+fi
+
 # ================================
 # homebrew bins
 # ================================
@@ -38,12 +56,21 @@ if [[ $KROKO_OS == darwin ]]; then
   # ----------------
   # Some extra stuff
   export PATH="/usr/local/sbin:$PATH"
+
   # ----------------
   # Homebrew
-  # x64
-  export PATH="/usr/local/bin:$PATH"
   # arm
   export PATH="/opt/homebrew/bin:$PATH"
+  # x64
+  export PATH="/usr/local/bin:$PATH"
+
+  # ----------------
+  # LLVM (keg-only)
+  # append, for clang-tidy
+  # arm
+  # export PATH="$PATH:/opt/homebrew/opt/llvm/bin"
+
+  # ----------------
   # export DYLD_FALLBACK_LIBRARY_PATH="$(brew --prefix)/lib:$DYLD_FALLBACK_LIBRARY_PATH"
   export DYLD_FALLBACK_LIBRARY_PATH="/opt/homebrew/bin/lib:$DYLD_FALLBACK_LIBRARY_PATH"
 fi
@@ -143,7 +170,6 @@ export PATH=$HOME/.opencode/bin:$PATH
 # macOS
 # ================================
 if [[ $KROKO_OS == darwin ]]; then
-
 
   # ----------------
   # VS Code

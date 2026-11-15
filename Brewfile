@@ -7,6 +7,10 @@ brew "gnupg"
 brew "pinentry-mac"
 brew "figlet"
 
+# llvm
+# just a note, to skip that gigabyte by default
+# brew "llvm"
+
 # dev
 brew "automake"
 brew "bear"
