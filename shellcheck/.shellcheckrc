@@ -1,0 +1,20 @@
+# https://www.shellcheck.net/wiki/
+
+# set default shell dialect to bash
+shell=bash
+
+# resolve `source`d files relative to each script's own directory
+source-path=SCRIPTDIR
+
+# Allow following any sourced file, not just ones passed on the command line
+external-sources=true
+
+# https://www.shellcheck.net/wiki/SC2034
+disable=SC2034
+
+# https://www.shellcheck.net/wiki/SC1090
+# https://www.shellcheck.net/wiki/SC1091
+disable=SC1090,SC1091
+
+# https://www.shellcheck.net/wiki/SC2312
+disable=SC2312

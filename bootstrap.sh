@@ -555,6 +555,7 @@ common_stow_dotfiles() {
     tmux
     vim
     editorconfig
+    shellcheck
     markdownlint
     "git-$OS"
     "gpg-${OS/wsl/linux}" # there is no gpg-wsl
