@@ -30,7 +30,9 @@
 
   // plugins
   "plugins": [
-    // "@khalilgharbaoui/opencode-claude-code-plugin", // claude via plugin not direct provider
-    "superpowers@git+https://github.com/obra/superpowers.git"
+    // claude via plugin not direct provider
+    // "@khalilgharbaoui/opencode-claude-code-plugin",
+    // obra/superpowers for some references
+    // "superpowers@git+https://github.com/obra/superpowers.git"
   ]
 }
