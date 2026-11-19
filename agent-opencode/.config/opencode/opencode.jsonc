@@ -26,9 +26,11 @@
         "num_ctx": 24576
       }
     }
-  }
-  // claude via plugin not direct provider
-  // "plugins": [
-  //   "@khalilgharbaoui/opencode-claude-code-plugin"
-  // ]
+  },
+
+  // plugins
+  "plugins": [
+    // "@khalilgharbaoui/opencode-claude-code-plugin", // claude via plugin not direct provider
+    "superpowers@git+https://github.com/obra/superpowers.git"
+  ]
 }
