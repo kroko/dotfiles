@@ -560,7 +560,7 @@ common_stow_dotfiles() {
     "git-$OS"
     "gpg-${OS/wsl/linux}" # there is no gpg-wsl
     python
-    opencode
+    agent-opencode
   )
   for package in "${packages_no_folding[@]}"; do
     common_stow_package_no_folding "$package"
