@@ -7,7 +7,7 @@
 	status = auto
 	branch = auto
 [init]
-	defaultBranch = master
+	defaultBranch = main
 [pull]
 	rebase = false
 [gpg]
@@ -16,7 +16,11 @@
 	gpgSign = true
 [tag]
 	gpgSign = true
-[credential]
-	helper = store
+[merge]
+	gpgsign = true
+[format]
+	signOff = false
 [core]
 	hooksPath = ~/.githooks
+[credential]
+	helper = store
