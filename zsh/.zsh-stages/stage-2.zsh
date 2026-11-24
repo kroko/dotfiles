@@ -132,6 +132,29 @@ source "$ZSH/oh-my-zsh.sh"
 # back to bash behaviour for this, need too often
 bindkey '^U' backward-kill-line
 
+# backwards delete to " mark
+backward-delete-to-double-quote() {
+  if [[ "$LBUFFER" == *\" ]]; then
+    # If cursor immediately after closing quote
+    # Preserve both quotes, delete their contents
+    LBUFFER="${LBUFFER%\"}"
+    if [[ "$LBUFFER" == *\"* ]]; then
+      LBUFFER="${LBUFFER%\"*}\""
+    else
+      LBUFFER+="\""
+    fi
+  else
+    # Otherwise, delete backward to the previous quote
+    if [[ "$LBUFFER" == *\"* ]]; then
+      LBUFFER="${LBUFFER%\"*}\""
+    else
+      LBUFFER=""
+    fi
+  fi
+}
+zle -N backward-delete-to-double-quote
+bindkey '^X^W' backward-delete-to-double-quote
+
 # ================================
 # aliases
 # ================================
