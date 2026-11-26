@@ -291,7 +291,8 @@ linux_limits() {
 linux_packages_main() {
   section "apt"
   sudo apt-get update
-  if linux_is_ubuntu; then
+  # apt-add-repository asks the launchpad api on every run, which can stall, so add the ppa only once
+  if linux_is_ubuntu && ! grep -rqs 'git-core/ppa' /etc/apt/sources.list.d/; then
     sudo apt-get install -y software-properties-common
     sudo apt-add-repository -y ppa:git-core/ppa
     sudo apt-get update
