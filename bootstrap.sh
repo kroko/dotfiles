@@ -607,10 +607,15 @@ prerequisites() {
     exec bash "$DOTFILES_DIR/bootstrap.sh" "$@"
   fi
 
-  # switch to ssh once a key can reach the repo, BatchMode so a missing key fails instead of prompting
+  # switch to ssh once a key can reach the repo
+  # on a terminal ssh may ask for the key passphrase, github takes keys only so it never asks for a password
+  # without a terminal BatchMode, so it fails instead of hanging on a prompt
   if [ "$(git -C "$DOTFILES_DIR" remote get-url origin 2> /dev/null)" = "$DOTFILES_REPO_HTTPS" ] && has ssh; then
-    if GIT_SSH_COMMAND="ssh -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=accept-new" \
-      git ls-remote "$DOTFILES_REPO_SSH" HEAD > /dev/null 2>&1; then
+    local ssh_cmd="ssh -o ConnectTimeout=5 -o StrictHostKeyChecking=accept-new"
+    if [ ! -t 0 ]; then
+      ssh_cmd="$ssh_cmd -o BatchMode=yes"
+    fi
+    if GIT_SSH_COMMAND="$ssh_cmd" git ls-remote "$DOTFILES_REPO_SSH" HEAD > /dev/null; then
       git -C "$DOTFILES_DIR" remote set-url origin "$DOTFILES_REPO_SSH"
       echo "origin switched to $DOTFILES_REPO_SSH"
     else
