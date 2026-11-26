@@ -27,9 +27,6 @@ OMZ_PLUGINS=(
 
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
-ZSH_CHANGES="$(git -C "$DOTFILES_DIR" status --porcelain -- zsh)"
-RUST_CHANGES="$(git -C "$DOTFILES_DIR" status --porcelain -- rust-macos)"
-
 section() {
   echo "================"
   echo "$1"
@@ -174,14 +171,18 @@ macos_configure() {
   fi
 }
 
-macos_packages_main() {
-  section "brew"
+macos_install_brew() {
   if ! has brew; then
     # brew pulls in xcode-select tools, no need for explicit xcode-select --install
     local installer
     installer="$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     /bin/bash -c "$installer"
   fi
+}
+
+macos_packages_main() {
+  section "brew"
+  macos_install_brew
   brew bundle install --file="$DOTFILES_DIR/Brewfile"
 }
 
@@ -575,6 +576,33 @@ common_stow_dotfiles() {
     common_stow_package_folding "$package"
   done
 }
+
+# ================================
+# prerequisites
+# ================================
+
+# git is needed before any step, fresh Linux has none
+# fresh macOS has only the /usr/bin/git shim that wants xcode-select tools
+prerequisites() {
+  section "prerequisites"
+  if [ "$OS" = "macos" ]; then
+    if ! xcode-select -p > /dev/null 2>&1; then
+      macos_install_brew
+    fi
+  elif ! has git; then
+    sudo apt-get update
+    sudo apt-get install -y git
+  fi
+
+  git -C "$DOTFILES_DIR" rev-parse --git-dir > /dev/null 2>&1 ||
+    die "$DOTFILES_DIR is not a git clone, clone it instead of downloading an archive"
+}
+
+prerequisites
+
+# snapshot before the installers run, see common_stow_package_adopt
+ZSH_CHANGES="$(git -C "$DOTFILES_DIR" status --porcelain -- zsh)"
+RUST_CHANGES="$(git -C "$DOTFILES_DIR" status --porcelain -- rust-macos)"
 
 # ================================
 # run
