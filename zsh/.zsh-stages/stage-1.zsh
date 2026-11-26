@@ -9,8 +9,13 @@ fi
 # ================================
 # ssh-agent
 # ================================
+# reuse a reachable agent (desktop session, ssh forwarding), start one only when none answers
+# ssh-add -l exits 2 when it cannot reach an agent, 1 when the agent holds no keys
 if [[ $KROKO_OS == linux ]]; then
-  eval "$(ssh-agent -s)" > /dev/null
+  ssh-add -l > /dev/null 2>&1
+  if (( $? == 2 )); then
+    eval "$(ssh-agent -s)" > /dev/null
+  fi
 fi
 
 # ================================
