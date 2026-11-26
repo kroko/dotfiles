@@ -26,6 +26,8 @@ OMZ_PLUGINS=(
 # ================================
 
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+# public, https so a fresh system needs no ssh key
+DOTFILES_REPO="https://github.com/kroko/dotfiles.git"
 
 section() {
   echo "================"
@@ -594,11 +596,18 @@ prerequisites() {
     sudo apt-get install -y git
   fi
 
-  git -C "$DOTFILES_DIR" rev-parse --git-dir > /dev/null 2>&1 ||
-    die "$DOTFILES_DIR is not a git clone, clone it instead of downloading an archive"
+  # downloaded as an archive, turn it into a clone in place, the repo version wins over the archive
+  # git checkout replaces files instead of writing into them, so this running script is safe, still re-exec to run the repo version
+  if ! git -C "$DOTFILES_DIR" rev-parse --git-dir > /dev/null 2>&1; then
+    git -C "$DOTFILES_DIR" init -q
+    git -C "$DOTFILES_DIR" remote add origin "$DOTFILES_REPO"
+    git -C "$DOTFILES_DIR" fetch origin main
+    git -C "$DOTFILES_DIR" checkout -f -B main origin/main
+    exec bash "$DOTFILES_DIR/bootstrap.sh" "$@"
+  fi
 }
 
-prerequisites
+prerequisites "$@"
 
 # snapshot before the installers run, see common_stow_package_adopt
 ZSH_CHANGES="$(git -C "$DOTFILES_DIR" status --porcelain -- zsh)"
