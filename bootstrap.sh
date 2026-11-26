@@ -26,8 +26,9 @@ OMZ_PLUGINS=(
 # ================================
 
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
-# public, https so a fresh system needs no ssh key
-DOTFILES_REPO="https://github.com/kroko/dotfiles.git"
+# public, https so a fresh system needs no ssh key, switched to ssh when a key works
+DOTFILES_REPO_HTTPS="https://github.com/kroko/dotfiles.git"
+DOTFILES_REPO_SSH="git@github.com:kroko/dotfiles.git"
 
 section() {
   echo "================"
@@ -600,10 +601,21 @@ prerequisites() {
   # git checkout replaces files instead of writing into them, so this running script is safe, still re-exec to run the repo version
   if ! git -C "$DOTFILES_DIR" rev-parse --git-dir > /dev/null 2>&1; then
     git -C "$DOTFILES_DIR" init -q
-    git -C "$DOTFILES_DIR" remote add origin "$DOTFILES_REPO"
+    git -C "$DOTFILES_DIR" remote add origin "$DOTFILES_REPO_HTTPS"
     git -C "$DOTFILES_DIR" fetch origin main
     git -C "$DOTFILES_DIR" checkout -f -B main origin/main
     exec bash "$DOTFILES_DIR/bootstrap.sh" "$@"
+  fi
+
+  # switch to ssh once a key can reach the repo, BatchMode so a missing key fails instead of prompting
+  if [ "$(git -C "$DOTFILES_DIR" remote get-url origin 2> /dev/null)" = "$DOTFILES_REPO_HTTPS" ] && has ssh; then
+    if GIT_SSH_COMMAND="ssh -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=accept-new" \
+      git ls-remote "$DOTFILES_REPO_SSH" HEAD > /dev/null 2>&1; then
+      git -C "$DOTFILES_DIR" remote set-url origin "$DOTFILES_REPO_SSH"
+      echo "origin switched to $DOTFILES_REPO_SSH"
+    else
+      echo "no ssh access to $DOTFILES_REPO_SSH, origin stays https"
+    fi
   fi
 }
 
