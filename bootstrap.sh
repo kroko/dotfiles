@@ -581,6 +581,21 @@ common_stow_dotfiles() {
   done
 }
 
+common_tmux_plugins() {
+  section "tmux plugins"
+  local plugin missing=""
+  while read -r plugin; do
+    if [ ! -d "$HOME/.tmux/plugins/$(basename "$plugin")" ]; then
+      missing="yes"
+    fi
+  done < <(sed -n -E "s/^[[:space:]]*set(-option)?[[:space:]]+-g[[:space:]]+@plugin[[:space:]]+['\"]?([^'\"[:space:]]+).*/\2/p" "$HOME/.tmux.conf")
+  if [ -n "$missing" ]; then
+    # a running server loaded without tpm
+    "$HOME/.tmux/plugins/tpm/bin/install_plugins" ||
+      echo "could not install tmux plugins, restart tmux (tmux kill-server) and press prefix + I"
+  fi
+}
+
 # ================================
 # prerequisites
 # ================================
@@ -655,5 +670,6 @@ required common_toolchains
 optional common_genai_harness
 
 required common_stow_dotfiles
+required common_tmux_plugins
 
 resume
